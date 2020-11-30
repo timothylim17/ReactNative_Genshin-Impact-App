@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "273059476698",
+    "firebase_url": "https://genshin-app-a8a7b.firebaseio.com",
+    "project_id": "genshin-app-a8a7b",
+    "storage_bucket": "genshin-app-a8a7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273059476698:android:aa8d3d71a2ea8bc6c361e3",
+        "android_client_info": {
+          "package_name": "com.genshin.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273059476698-i1va9ludtqkohhe476cdle6bbr2vagt2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWFW9QsL_vRHA8co79EouC7nBKDt1FzaU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273059476698-i1va9ludtqkohhe476cdle6bbr2vagt2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
