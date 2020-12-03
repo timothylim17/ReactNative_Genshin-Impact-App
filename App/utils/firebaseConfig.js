@@ -1,14 +1,23 @@
-import * as firebase from "firebase";
+import {
+  API_KEY,
+  AUTH_DOMAIN,
+  DATABASE_URL,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDER_ID,
+  APP_ID,
+  MEASUREMENT_ID
+} from '@env';
 
-// use react-native-dotenv
 const firebaseConfig = {
-  apiKey: "AIzaSyDWFW9QsL_vRHA8co79EouC7nBKDt1FzaU",
-  authDomain: "genshin-app-a8a7b.firebaseapp.com",
-  databaseURL: "https://genshin-app-a8a7b.firebaseio.com",
-  projectId: "genshin-app-a8a7b",
-  storageBucket: "genshin-app-a8a7b.appspot.com",
-  messagingSenderId: "sender-id",
-  appId: "app-id",
-  measurementId: "G-measurement-id",
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  databaseURL: DATABASE_URL,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID,
+  measurementId: MEASUREMENT_ID,
 };
-firebase.initializeApp(firebaseConfig);
+
+export { firebaseConfig };

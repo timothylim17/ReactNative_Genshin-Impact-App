@@ -14,7 +14,7 @@ import {
   DrawerItem,
 } from "@react-navigation/drawer";
 
-import { Home, Threads, TierList } from 'genshin-impact-app/App/modules/screens';
+import { Home, Threads, TierList, SignIn } from 'genshin-impact-app/App/modules/screens';
 
 const Drawer = createDrawerNavigator();
 
@@ -23,6 +23,7 @@ function MyDrawer() {
     <Drawer.Navigator
     // drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
+      <Drawer.Screen name="Sign In" component={SignIn} />
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Threads" component={Threads} />
       <Drawer.Screen name="Tier List" component={TierList} />
