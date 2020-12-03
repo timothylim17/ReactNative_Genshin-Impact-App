@@ -14,9 +14,7 @@ import {
   DrawerItem,
 } from "@react-navigation/drawer";
 
-import Home from "genshin-impact-app/App/screens/Home";
-import Threads from "genshin-impact-app/App/screens/Threads";
-import TierList from "genshin-impact-app/App/screens/TierList";
+import { Home, Threads, TierList } from 'genshin-impact-app/App/modules/screens';
 
 const Drawer = createDrawerNavigator();
 
