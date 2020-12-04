@@ -7,7 +7,7 @@ import {
   MESSAGING_SENDER_ID,
   APP_ID,
   MEASUREMENT_ID
-} from 'react-native-dotenv';
+} from '@env';
 
 export const firebaseConfig = {
   apiKey: API_KEY,
