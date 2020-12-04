@@ -19,3 +19,4 @@ export const firebaseConfig = {
   appId: APP_ID,
   measurementId: MEASUREMENT_ID,
 };
+
