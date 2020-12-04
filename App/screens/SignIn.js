@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   View,
   Text,
@@ -25,7 +25,8 @@ const androidClientId = {
   ANDROID_CLIENT_ID
 };
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Sign In</Text>

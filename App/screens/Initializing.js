@@ -11,17 +11,22 @@ const styles = StyleSheet.create({
   }
 })
 
-export default function Initializing() {
+export default function Initializing({ navigation }) {
 
   useEffect(() => {
-    // Check if user is authenticated
-    // firebase.auth().onAuthStateChanged(user => {
-    //   if (user)
-    //     this.props.navigation.navigate('Home');
-    //   else
-    //     this.props.navigate.navigate('CreateAccount');
-    // })
+    checkIfLoggedIn();
   });
+    
+
+  const checkIfLoggedIn = () => {
+    // Check if user is authenticated
+    firebase.auth().onAuthStateChanged(user => {
+      if (user)
+        navigation.navigate('Home');
+      else
+        navigation.navigate('Sign In');
+    })
+  };
 
   return (
     <View style={styles.container}>
