@@ -13,8 +13,18 @@ import {
   DrawerItemList,
   DrawerItem,
 } from "@react-navigation/drawer";
+import * as firebase from 'firebase';
+import {
+  Home,
+  Threads,
+  TierList,
+  SignIn
+} from 'genshin-impact-app/App/modules/screens';
+import { firebaseConfig } from 'genshin-impact-app/App/modules/utils';
 
-import { Home, Threads, TierList, SignIn } from 'genshin-impact-app/App/modules/screens';
+
+// Initialize firebase
+firebase.initializeApp(firebaseConfig);
 
 const Drawer = createDrawerNavigator();
 

@@ -7,9 +7,9 @@ import {
   MESSAGING_SENDER_ID,
   APP_ID,
   MEASUREMENT_ID
-} from '@env';
+} from 'react-native-dotenv';
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: API_KEY,
   authDomain: AUTH_DOMAIN,
   databaseURL: DATABASE_URL,
@@ -19,5 +19,3 @@ const firebaseConfig = {
   appId: APP_ID,
   measurementId: MEASUREMENT_ID,
 };
-
-export { firebaseConfig };
