@@ -145,18 +145,26 @@ export default function CreateAccount({ navigation }) {
         firebase.auth().signInWithCredential(credential)
           .then(result => {
             console.log('user sign in');
-            firebase.database()
+            if (result.additionalUserInfo.isNewUser) {
+              firebase.database()
               .ref('/users' + result.user.uid)
               .set({
                 gmail: result.user.email,
                 profile_picture: result.additionalUserInfo.profile_picture.locale,
                 first_name: result.additionalUserInfo.given_name,
-                last_name: result.additionalUserInfo.first_name
+                last_name: result.additionalUserInfo.first_name,
+                created_at: Date.now()
               })
               .then(snapshot => {
-              
+                console.log('firebase db: ', snapshot);
               });
-              
+            } else {
+              firebase.database()
+                .ref('/users' + result.user.uid)
+                .update({
+                  last_logged_in: Date.now()
+                });
+            }
           })
           .catch(e => {
             // Print errors here
@@ -173,7 +181,8 @@ export default function CreateAccount({ navigation }) {
       const result = await Google.logInAsync(googleAuthConfig);
 
       if (result.type === 'success') {
-        onSignIn(result.user.auth);
+        console.log('sign up result: ', result);
+        onSignIn(result);
         return result.accessToken;
       }
     } catch ({ message }) {

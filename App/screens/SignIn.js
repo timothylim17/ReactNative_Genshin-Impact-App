@@ -121,10 +121,18 @@ export default function SignIn({ navigation }) {
       const result = await Google.logInAsync(googleAuthConfig);
 
       if (result.type === 'success') {
-        await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-        const credential = firebase.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken);
-        const googleProfileData = await firebase.auth().signInWithCredential(credential);
-        onLoginSuccess();
+        const { idToken, accessToken } = result;
+        console.log('sign in result: ', result);
+        const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
+        firebase.auth()
+          .signInWithCredential(credential)
+          .then(res => {
+            console.log('login successful \n', res);
+            onLoginSuccess();
+          })
+          .catch(e => {
+            console.log('error with firebase')
+          });
       }
     } catch ({ message }) {
       alert('login: Error: ' + message);
