@@ -35,6 +35,7 @@ import {
 
 import Home from "genshin-impact-app/App/screens/Home";
 import Threads from "genshin-impact-app/App/screens/Threads";
+import CharacterInfo from "genshin-impact-app/App/screens/CharacterInfo";
 import TierList from "genshin-impact-app/App/screens/TierList";
 import SignIn from "genshin-impact-app/App/screens/SignIn";
 import CreateAccount from "genshin-impact-app/App/screens/CreateAccount";
@@ -49,6 +50,10 @@ function MyDrawer() {
       <MainDrawerNavigator.Screen name="Home" component={Home} />
       <MainDrawerNavigator.Screen name="Threads" component={Threads} />
       <MainDrawerNavigator.Screen name="Tier List" component={TierList} />
+      <MainDrawerNavigator.Screen
+        name="Character Info"
+        component={CharacterInfo}
+      />
       <MainDrawerNavigator.Screen
         name="SignIn"
         component={SignIn}
