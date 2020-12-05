@@ -22,7 +22,7 @@ const Drawer = createDrawerNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
+      <Stack.Screen name="Sign In" component={SignIn} options={{ headerShown: false }} />
       <Stack.Screen name="Create Account" component={CreateAccount} />
     </Stack.Navigator>
   );

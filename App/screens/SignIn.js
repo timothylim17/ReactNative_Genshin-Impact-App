@@ -8,21 +8,26 @@ import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Keyboard,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Plaform,
+  Platform
 } from "react-native";
 import * as Google from 'expo-google-app-auth';
+import * as GoogleSignIn from 'expo-google-sign-in';
 import {
   IOS_CLIENT_ID,
   ANDROID_CLIENT_ID,
+  WEB_CLIENT_ID
 } from '@env';
 import { TextInput } from "react-native-gesture-handler";
 
-const iosClientId = {
-  IOS_CLIENT_ID
-};
+const isAndroid = () => Platform.OS === 'android',
+  androidID = ANDROID_CLIENT_ID,
+  iosID = IOS_CLIENT_ID;
 
-const androidClientId = {
-  ANDROID_CLIENT_ID
+const googleAuthConfig = {
+  clientId: isAndroid() ? androidID : iosID,
+  scopes: ['profile', 'email'],
 };
 
 const styles = StyleSheet.create({
@@ -111,18 +116,63 @@ export default function SignIn({ navigation }) {
       })
   }
 
+  const isUserEqual = (googleUser, firebaseUser) => {
+    if (firebaseUser) {
+      var providerData = firebaseUser.providerData;
+      for (var i = 0; i < providerData.length; i++) {
+        if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+            providerData[i].uid === googleUser.getBasicProfile().getId()) {
+          // We don't need to reauth the Firebase connection.
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  const onSignIn = googleUser => {
+    console.log('Google Auth Response', googleUser);
+    // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+    var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) => {
+      unsubscribe();
+      // Check if we are already signed-in Firebase with the correct user.
+      if (!isUserEqual(googleUser, firebaseUser)) {
+        // Build Firebase credential with the Google ID token.
+        var credential = firebase.auth.GoogleAuthProvider.credential(
+          googleUser.idToken,
+          googleUser.accessToken
+        );
+
+        // Sign in with credential from the Google user.
+        firebase.auth().signInWithCredential(credential)
+          .then(() => {
+            console.log('User is signed in');
+          })
+          .catch((error) => {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+        });
+      } else {
+        console.log('User already signed-in Firebase.');
+      }
+    });
+  }
+
   async function signInWithGoogleAsync() {
     try {
-      const result = await Google.logInAsync({
-        androidClientId,
-        iosClientId,
-      });
+      const result = await Google.logInAsync(googleAuthConfig);
       console.log(result);
 
       if (result.type === 'success') {
-        await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-        const credential = firebase.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken);
-        const googleProfileData = await firebase.auth().signInWithCredential(credential);
+        onSignIn(result);
+        // await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+        // const credential = firebase.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken);
+        // const googleProfileData = await firebase.auth().signInWithCredential(credential);
         onLoginSuccess();
       }
     } catch ({ message }) {
