@@ -19,24 +19,26 @@ firebase.initializeApp(firebaseConfig);
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-const AuthStack = () => (
-  <Stack.Navigator headerMode="none">
-    <Stack.Screen name="Sign In" component={SignIn} />
-    <Stack.Screen name="Create Account" component={CreateAccount} />
-  </Stack.Navigator>
-);
+function AuthStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
+      <Stack.Screen name="Create Account" component={CreateAccount} />
+    </Stack.Navigator>
+  );
+}
 
-const DrawerStack = () => (
-  <Drawer.Navigator
-  // drawerContent={(props) => <CustomDrawerContent {...props} />}
-  >
-    <Drawer.Screen name="Sign In" component={SignIn} />
-    <Drawer.Screen name="Initializing" component={Initializing} />
+function DrawerStack() {
+  return (
+    <Drawer.Navigator>
+    {/* <Drawer.Screen name="SignIn" component={SignIn} />
+    <Drawer.Screen name="Initializing" component={Initializing} /> */}
     <Drawer.Screen name="Home" component={Home} />
     <Drawer.Screen name="Threads" component={Threads} />
     <Drawer.Screen name="Tier List" component={TierList} />
   </Drawer.Navigator>
-);
+  )
+}
 
 export default function App() {
   const [loggedIn, isLoggedIn] = useState(false);
@@ -50,14 +52,15 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {isLoading ? (
+      {/* {isLoading ? (
         <Initializing />
         ) : isLoggedIn ? (
             <DrawerStack />
         ) : (
             <AuthStack />
           )
-      }
+      } */}
+      <AuthStack />
     </NavigationContainer>
   );
 }

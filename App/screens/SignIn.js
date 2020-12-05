@@ -10,15 +10,14 @@ import {
   Keyboard,
   TouchableWithoutFeedback
 } from "react-native";
-
 import * as Google from 'expo-google-app-auth';
-import * as GoogleSignIn from 'expo-google-sign-in';
 import {
   IOS_CLIENT_ID,
   ANDROID_CLIENT_ID,
 } from '@env';
+import { TextInput } from "react-native-gesture-handler";
 
-const IOSClientId = {
+const iosClientId = {
   IOS_CLIENT_ID
 };
 
@@ -31,11 +30,45 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center'
+  },
+  form: {
+    width: '86%',
+    marginTop: 15,
+  },
+  logo: {
+    marginTop: 20
+  },
+  input: {
+    fontSize: 20,
+    borderColor: '#707070',
+    borderBottomWidth: 1,
+    paddingBottom: 1.5,
+    marginTop: 25.5,
+  },
+  button: {
+    backgroundColor: '#3a559f',
+    height: 44,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 22
+  },
+  googleButton: {
+    backgroundColor: '#ffffff',
+    height: 44,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 22,
+    borderWidth: 1,
+    borderColor: '#707070'
   }
 })
 
 export default function SignIn({ navigation }) {
-  const [email, password, errorMessage, setErrorMessage] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage,] = useState(null);
   const [isLoading] = useState(false);
 
   // Login successful
@@ -47,6 +80,16 @@ export default function SignIn({ navigation }) {
   const onLoginFailure = e => {
     setErrorMessage(e);
     isLoading(false);
+  }
+
+  const renderLoading = () => {
+    if (isLoading) {
+      return (
+        <View>
+          <ActivityIndicator size="large" color="#000" />
+        </View>
+      )
+    }
   }
 
   // Sign in with Email
@@ -73,9 +116,8 @@ export default function SignIn({ navigation }) {
       const result = await Google.logInAsync({
         androidClientId,
         iosClientId,
-        behavior: 'web',
-        scopes: ['profile', 'email']
       });
+      console.log(result);
 
       if (result.type === 'success') {
         await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
@@ -99,7 +141,68 @@ export default function SignIn({ navigation }) {
           <Text style={{ fontSize: 32, fontWeight: "700", color: "#000", paddingTop: 40 }}>
             Genshin Impact
           </Text>
-        </KeyboardAvoidingView>
+          <View style={styles.form}>
+            <TextInput
+              style={styles.input}
+              placeholder="Email"
+              placeholderTextColor="#B1B1B1"
+              returnKeyType="next"
+              keyboardType="email-address"
+              textContentType="emailAddress"
+              value={email}
+              onChangeText={account => setEmail({ account })}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              placeholderTextColor="#b1b1b1"
+              returnKeyType="done"
+              textContentType="newPassword"
+              secureTextEntry={true}
+              value={password}
+              onChangeText={credentials => setPassword({ credentials })}
+            />
+          </View>
+          {renderLoading()}
+          <Text
+            style={{
+              fontSize: 18,
+              textAlign: 'center',
+              color: 'red',
+              width: '80%',
+            }}
+          >
+            {errorMessage}
+          </Text>
+          <TouchableOpacity
+            style={{ width: '86%', marginTop: 10 }}
+            onPress={() => signInWithEmail()}
+          >
+            <Text>Sign In</Text>  
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{ width: '86%', marginTop: 10 }}
+            onPress={() => signInWithGoogleAsync()}
+          >
+            <Text
+              style={{
+                letterSpacing: 0.5,
+                fontSize: 16,
+                color: '#707070'
+              }}
+            >
+              Continue with Google
+              </Text>
+          </TouchableOpacity>
+          <View style={{ marginTop: 10 }}>
+            <Text
+              style={{ fontWeight: "200", fontSize: 17, textAlign: "center" }}
+              onPress={() => navigation.navigate('Create Account')}
+            >
+              Don't have an Account?
+            </Text>
+          </View>
+        </KeyboardAvoidingView>   
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
