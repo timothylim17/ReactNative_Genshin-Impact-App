@@ -23,7 +23,7 @@ function AuthStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Sign In" component={SignIn} options={{ headerShown: false }} />
-      <Stack.Screen name="Create Account" component={CreateAccount} />
+      <Stack.Screen name="Create Account" component={CreateAccount} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }
@@ -31,30 +31,32 @@ function AuthStack() {
 function DrawerStack() {
   return (
     <Drawer.Navigator>
-    {/* <Drawer.Screen name="SignIn" component={SignIn} />
-    <Drawer.Screen name="Initializing" component={Initializing} /> */}
-    <Drawer.Screen name="Home" component={Home} />
-    <Drawer.Screen name="Threads" component={Threads} />
-    <Drawer.Screen name="Tier List" component={TierList} />
-  </Drawer.Navigator>
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Threads" component={Threads} />
+      <Drawer.Screen name="Tier List" component={TierList} />
+    </Drawer.Navigator>
   )
 }
 
 export default function App() {
-  const [loggedIn, isLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   // useEffect(() => {
   //   setTimeout(() => {
   //     setIsLoading(!isloading);
   //   }, 500);
+
+  //   setTimeout(() => {
+  //     setUser({});
+  //   }, 1000)
   // }, []);
 
   return (
     <NavigationContainer>
       {/* {isLoading ? (
         <Initializing />
-        ) : isLoggedIn ? (
+        ) : user ? (
             <DrawerStack />
         ) : (
             <AuthStack />
