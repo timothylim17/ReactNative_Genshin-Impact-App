@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import {
   View,
   Text,
@@ -18,6 +18,8 @@ import {
   ANDROID_CLIENT_ID,
 } from '@env';
 import { TextInput } from "react-native-gesture-handler";
+
+import { setUserData } from 'genshin-impact-app/App/modules/utils';
 
 const isAndroid = () => Platform.OS === 'android',
   androidID = ANDROID_CLIENT_ID,
@@ -77,6 +79,8 @@ export default function CreateAccount({ navigation }) {
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading] = useState(false);
 
+  const { createAccount } = useContext(AuthContext);
+
   const onLoginSuccess = () => {
     navigation.navigate('Home');
   }
@@ -103,6 +107,10 @@ export default function CreateAccount({ navigation }) {
       .signInWithEmailAndPassword(email, password)
       .then(result => {
         console.log(result);
+        // push it to storage
+        // push it to storage
+        console.log(result);
+        createAccount(setUserData(JSON.stringify(res.user)));
         onLoginSuccess();
       })
       .catch(e => {
@@ -116,81 +124,81 @@ export default function CreateAccount({ navigation }) {
       });
   }
 
-  const isUserEqual = (googleUser, firebaseUser) => {
-    if (firebaseUser) {
-      var providerData = firebaseUser.providerData;
-      for (var i = 0; i < providerData.length; i++) {
-        if (providerData[i].providerData === firebase.auth.GoogleAuthProvider.PROVIDER_ID
-          && providerData[i].uid === googleUser.getBasicProfile().getId()) {
-          // No need to reauth Firebase Connection
-          return true;
-        }
-      }
-    }
-    return false;
-  }
+  // const isUserEqual = (googleUser, firebaseUser) => {
+  //   if (firebaseUser) {
+  //     var providerData = firebaseUser.providerData;
+  //     for (var i = 0; i < providerData.length; i++) {
+  //       if (providerData[i].providerData === firebase.auth.GoogleAuthProvider.PROVIDER_ID
+  //         && providerData[i].uid === googleUser.getBasicProfile().getId()) {
+  //         // No need to reauth Firebase Connection
+  //         return true;
+  //       }
+  //     }
+  //   }
+  //   return false;
+  // }
 
-  const onSignIn = googleUser => {
-    console.log('Google Auth Response', googleUser);
+  // const onSignIn = googleUser => {
+  //   console.log('Google Auth Response', googleUser);
 
-    var unsubscribe = firebase.auth().onAuthStateChanged(function (firebaseUser) {
-      unsubscribe();
+  //   var unsubscribe = firebase.auth().onAuthStateChanged(function (firebaseUser) {
+  //     unsubscribe();
 
-      // Check if already signed-in Firebase with the correct user
-      if (!isUserEqual(googleUser, firebaseUser)) {
-        // Build Firebase Credential with the Google ID token
-        var credential = firebase.auth.GoogleAuthProvider.credential(
-          googleUser.token,
-          googleUser.accessToken
-        );
-        // Sign In with credential from the Google User
-        firebase.auth().signInWithCredential(credential)
-          .then(result => {
-            console.log('user sign in');
-            if (result.additionalUserInfo.isNewUser) {
-              firebase.database()
-              .ref('/users' + result.user.uid)
-              .set({
-                gmail: result.user.email,
-                profile_picture: result.additionalUserInfo.profile_picture.locale,
-                first_name: result.additionalUserInfo.given_name,
-                last_name: result.additionalUserInfo.first_name,
-                created_at: Date.now()
-              })
-              .then(snapshot => {
-                console.log('firebase db: ', snapshot);
-              });
-            } else {
-              firebase.database()
-                .ref('/users' + result.user.uid)
-                .update({
-                  last_logged_in: Date.now()
-                });
-            }
-          })
-          .catch(e => {
-            // Print errors here
-            console.log('onSignIn Error: ', e);
-          });
-      } else {
-        console.log('User already signed in Firebase');
-      }
-    })
-  }
+  //     // Check if already signed-in Firebase with the correct user
+  //     if (!isUserEqual(googleUser, firebaseUser)) {
+  //       // Build Firebase Credential with the Google ID token
+  //       var credential = firebase.auth.GoogleAuthProvider.credential(
+  //         googleUser.token,
+  //         googleUser.accessToken
+  //       );
+  //       // Sign In with credential from the Google User
+  //       firebase.auth().signInWithCredential(credential)
+  //         .then(result => {
+  //           console.log('user sign in');
+  //           if (result.additionalUserInfo.isNewUser) {
+  //             firebase.database()
+  //             .ref('/users' + result.user.uid)
+  //             .set({
+  //               gmail: result.user.email,
+  //               profile_picture: result.additionalUserInfo.profile_picture.locale,
+  //               first_name: result.additionalUserInfo.given_name,
+  //               last_name: result.additionalUserInfo.first_name,
+  //               created_at: Date.now()
+  //             })
+  //             .then(snapshot => {
+  //               console.log('firebase db: ', snapshot);
+  //             });
+  //           } else {
+  //             firebase.database()
+  //               .ref('/users' + result.user.uid)
+  //               .update({
+  //                 last_logged_in: Date.now()
+  //               });
+  //           }
+  //         })
+  //         .catch(e => {
+  //           // Print errors here
+  //           console.log('onSignIn Error: ', e);
+  //         });
+  //     } else {
+  //       console.log('User already signed in Firebase');
+  //     }
+  //   })
+  // }
 
-  async function signInWithGoogleAsync() {
-    try {
-      const result = await Google.logInAsync(googleAuthConfig);
+  // async function signInWithGoogleAsync() {
+  //   try {
+  //     const result = await Google.logInAsync(googleAuthConfig);
 
-      if (result.type === 'success') {
-        console.log('sign up result: ', result);
-        onSignIn(result);
-        return result.accessToken;
-      }
-    } catch ({ message }) {
-      alert('login: Error: ' + message);
-    }
-  }
+  //     if (result.type === 'success') {
+  //       console.log('sign up result: ', result);
+  //       onSignIn(result);
+  //       return result.accessToken;
+  //     }
+  //   } catch ({ message }) {
+  //     alert('login: Error: ' + message);
+  //   }
+  // }
 
   return (
     <TouchableWithoutFeedback
@@ -243,7 +251,7 @@ export default function CreateAccount({ navigation }) {
               <Text>Sign Up</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{ width: '86%', marginTop: 10 }}
             onPress={() => signInWithGoogleAsync()}
           >
@@ -258,7 +266,7 @@ export default function CreateAccount({ navigation }) {
                 Continue with Google
               </Text>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View style={{ marginTop: 10 }}>
             <Text
               style={{ fontWeight: '200', fontSize: 17, textAlign: 'center' }}
