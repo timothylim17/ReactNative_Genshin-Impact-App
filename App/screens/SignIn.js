@@ -127,6 +127,7 @@ export default function SignIn({ navigation }) {
         firebase.auth()
           .signInWithCredential(credential)
           .then(res => {
+            // User is authenticated and can navigate to the main page
             console.log('login successful \n', res);
             onLoginSuccess();
           })
@@ -159,7 +160,7 @@ export default function SignIn({ navigation }) {
               keyboardType="email-address"
               textContentType="emailAddress"
               value={email}
-              onChangeText={account => setEmail({ account })}
+              onChangeText={account => setEmail(account)}
             />
             <TextInput
               style={styles.input}
@@ -169,7 +170,7 @@ export default function SignIn({ navigation }) {
               textContentType="newPassword"
               secureTextEntry={true}
               value={password}
-              onChangeText={credentials => setPassword({ credentials })}
+              onChangeText={credentials => setPassword(credentials)}
             />
           </View>
           {renderLoading()}

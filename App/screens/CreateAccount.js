@@ -12,6 +12,7 @@ import {
   Platform
 } from "react-native";
 import * as Google from 'expo-google-app-auth';
+import * as firebase from 'firebase';
 import {
   IOS_CLIENT_ID,
   ANDROID_CLIENT_ID,
@@ -100,7 +101,8 @@ export default function CreateAccount({ navigation }) {
     await firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then(result => {
+        console.log(result);
         onLoginSuccess();
       })
       .catch(e => {
@@ -111,7 +113,7 @@ export default function CreateAccount({ navigation }) {
           onLoginFailure('Weak Password!');
         else
           onLoginFailure(errorMessage);
-      })
+      });
   }
 
   const isUserEqual = (googleUser, firebaseUser) => {
@@ -210,7 +212,7 @@ export default function CreateAccount({ navigation }) {
               textContentType="emailAddress"
               keyboardType="email-address"
               value={email}
-              onChangeText={account => setEmail({ account })}
+              onChangeText={account => setEmail(account)}
             />
             <TextInput
               style={styles.input}
@@ -219,7 +221,7 @@ export default function CreateAccount({ navigation }) {
               returnKeyType="done"
               textContentType="newPassword"
               value={password}
-              onChangeText={credentials => setPassword({ credentials })}
+              onChangeText={credentials => setPassword(credentials)}
             />
           </View>
           {renderLoading()}

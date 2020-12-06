@@ -21,7 +21,7 @@ export default function Initializing({ navigation }) {
   const checkIfLoggedIn = () => {
     // Check if user is authenticated
     firebase.auth().onAuthStateChanged(user => {
-      console.log("AUTH STATE CHANGED");
+      console.log("AUTH STATE CHANGED", user);
       if (user)
         navigation.navigate('Home');
       else
