@@ -9,6 +9,16 @@ export default function TierList({ navigation }) {
         title="Diluc"
         onPress={() => navigation.navigate("Character Info", { name: "Diluc" })}
       />
+      <Button
+        title="Mona"
+        onPress={() => navigation.navigate("Character Info", { name: "Mona" })}
+      />
+      <Button
+        title="Keqing"
+        onPress={() =>
+          navigation.navigate("Character Info", { name: "Keqing" })
+        }
+      />
     </View>
   );
 }
