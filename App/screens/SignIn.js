@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,8 @@ import {
   ANDROID_CLIENT_ID,
 } from '@env';
 import { TextInput } from "react-native-gesture-handler";
+
+import { setUserData } from 'genshin-impact-app/App/modules/utils';
 
 const isAndroid = () => Platform.OS === 'android',
   androidID = ANDROID_CLIENT_ID,
@@ -73,8 +75,10 @@ const styles = StyleSheet.create({
 export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userData, setUserData] = useState({});
   const [errorMessage, setErrorMessage,] = useState(null);
-  const [isLoading] = useState(false);
+
+  const { signIn } = useContext(AuthContext);
 
   // Login successful
   const onLoginSuccess = () => {
@@ -102,7 +106,10 @@ export default function SignIn({ navigation }) {
     await firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then(result => {
+        // push it to storage
+        console.log(result);
+        signIn(setUserData(JSON.stringify(res.user)));
         onLoginSuccess();
       })
       .catch(e => {
@@ -116,29 +123,29 @@ export default function SignIn({ navigation }) {
       })
   }
 
-  async function signInWithGoogleAsync() {
-    try {
-      const result = await Google.logInAsync(googleAuthConfig);
+  // async function signInWithGoogleAsync() {
+  //   try {
+  //     const result = await Google.logInAsync(googleAuthConfig);
 
-      if (result.type === 'success') {
-        const { idToken, accessToken } = result;
-        console.log('sign in result: ', result);
-        const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
-        firebase.auth()
-          .signInWithCredential(credential)
-          .then(res => {
-            // User is authenticated and can navigate to the main page
-            console.log('login successful \n', res);
-            onLoginSuccess();
-          })
-          .catch(e => {
-            console.log('error with firebase')
-          });
-      }
-    } catch ({ message }) {
-      alert('login: Error: ' + message);
-    }
-  }
+  //     if (result.type === 'success') {
+  //       const { idToken, accessToken } = result;
+  //       console.log('sign in result: ', result);
+  //       const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
+  //       firebase.auth()
+  //         .signInWithCredential(credential)
+  //         .then(res => {
+  //           // User is authenticated and can navigate to the main page
+  //           console.log('login successful \n', res);
+  //           onLoginSuccess();
+  //         })
+  //         .catch(e => {
+  //           console.log('error with firebase')
+  //         });
+  //     }
+  //   } catch ({ message }) {
+  //     alert('login: Error: ' + message);
+  //   }
+  // }
 
   return (
     <TouchableWithoutFeedback
@@ -192,7 +199,7 @@ export default function SignIn({ navigation }) {
               <Text>Sign In</Text>  
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{ width: '86%', marginTop: 10 }}
             onPress={() => signInWithGoogleAsync()}
           >
@@ -207,7 +214,7 @@ export default function SignIn({ navigation }) {
               Continue with Google
               </Text>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View style={{ marginTop: 10 }}>
             <Text
               style={{ fontWeight: "200", fontSize: 17, textAlign: "center" }}
