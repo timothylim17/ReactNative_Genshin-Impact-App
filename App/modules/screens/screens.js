@@ -4,6 +4,7 @@ import SignIn from "genshin-impact-app/App/screens/SignIn";
 import Threads from "genshin-impact-app/App/screens/Threads";
 import TierList from "genshin-impact-app/App/screens/TierList";
 import Initializing from "genshin-impact-app/App/screens/Initializing";
+import CharacterInfo from "genshin-impact-app/App/screens/CharacterInfo";
 
 export {
   Home,
@@ -11,5 +12,6 @@ export {
   Threads,
   TierList,
   CreateAccount,
-  Initializing
+  Initializing,
+  CharacterInfo
 };

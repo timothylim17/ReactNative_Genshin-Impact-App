@@ -4,6 +4,7 @@ import {
   Home,
   Threads,
   TierList,
+  CharacterInfo
 } from 'genshin-impact-app/App/modules/screens';
 
 const Drawer = createDrawerNavigator();
@@ -14,6 +15,7 @@ export default function MainStack() {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Threads" component={Threads} />
       <Drawer.Screen name="Tier List" component={TierList} />
+      <Drawer.Screen name="Character Info" component={CharacterInfo} />
     </Drawer.Navigator>
   );
 }

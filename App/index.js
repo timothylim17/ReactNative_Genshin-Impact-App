@@ -34,7 +34,8 @@ export default function App() {
             <AuthStack />
           )
       } */}
-      <AuthStack />
+      {/* <AuthStack /> */}
+      <MainStack />
     </NavigationContainer>
   );
 }
