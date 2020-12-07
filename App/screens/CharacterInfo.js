@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import { View, Text } from "react-native";
 
-import { genshinApi } from "../utils/genshinApi";
+import { genshinApi } from "genshin-impact-app/App/modules/utils";
 
 export default class CharacterInfo extends React.Component {
   state = {
