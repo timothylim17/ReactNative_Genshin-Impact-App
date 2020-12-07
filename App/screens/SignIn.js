@@ -5,10 +5,7 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  KeyboardAvoidingView,
-  Keyboard,
-  TouchableWithoutFeedback,
-  Alert
+  KeyboardAvoidingView
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
@@ -60,13 +57,7 @@ export default function SignIn({ navigation }) {
   const [errorMessage, setErrorMessage] = useState(null);
   const { signIn } = useContext(AuthContext);
 
-
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-      }}
-    >
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Text style={{ fontSize: 32, fontWeight: "700", color: "#000", paddingTop: 40 }}>
@@ -127,6 +118,5 @@ export default function SignIn({ navigation }) {
         </View>
       </KeyboardAvoidingView>   
     </SafeAreaView>
-  </TouchableWithoutFeedback>
   );
 }

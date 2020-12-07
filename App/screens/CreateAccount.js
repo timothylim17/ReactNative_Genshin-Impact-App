@@ -58,76 +58,70 @@ export default function CreateAccount({ navigation }) {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = ('');
 
-
   const { signUp } = useContext(AuthContext);
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dimiss();
-      }}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
-          <Text style={{ fontSize: 32, fontWeight: "700", color: "#000", paddingTop: 40 }}>
-            Genshin Impact
-          </Text>
-          <View style={styles.form}>
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              placeholderTextColor="#b1b1b1"
-              returnKeyType="next"
-              textContentType="emailAddress"
-              keyboardType="email-address"
-              value={email}
-              onChangeText={account => setEmail(account)}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              placeholderTextColor="#b1b1b1"
-              returnKeyType="done"
-              textContentType="newPassword"
-              value={password}
-              onChangeText={credentials => setPassword(credentials)}
-            />
+    <SafeAreaView style={{ flex: 1 }}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <Text style={{ fontSize: 32, fontWeight: "700", color: "#000", paddingTop: 40 }}>
+          Genshin Impact
+        </Text>
+        <View style={styles.form}>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            placeholderTextColor="#b1b1b1"
+            returnKeyType="next"
+            textContentType="emailAddress"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={account => setEmail(account)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            placeholderTextColor="#b1b1b1"
+            returnKeyType="done"
+            textContentType="newPassword"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={credentials => setPassword(credentials)}
+          />
+        </View>
+        <Text
+          style={{
+            fontSize: 18,
+            textAlign: 'center',
+            color: 'red',
+            width: '80%'
+          }}
+        >
+          {errorMessage}  
+        </Text>
+        <TouchableOpacity
+          style={{ width: '86%', marginTop: 10 }}
+          onPress={() => {
+            signUp(email, password)
+              .catch(e => {
+                setErrorMessage(e);
+              });
+          }}
+        >
+          <View style={styles.button}>
+            <Text>Sign Up</Text>
           </View>
+        </TouchableOpacity>
+        <View style={{ marginTop: 10 }}>
           <Text
-            style={{
-              fontSize: 18,
-              textAlign: 'center',
-              color: 'red',
-              width: '80%'
-            }}
-          >
-            {errorMessage}  
-          </Text>
-          <TouchableOpacity
-            style={{ width: '86%', marginTop: 10 }}
+            style={{ fontWeight: '200', fontSize: 17, textAlign: 'center' }}
             onPress={() => {
-              signUp(email, password)
-                .catch(e => {
-                  setErrorMessage(e);
-                });
+              navigation.navigate('Sign In');
             }}
           >
-            <View style={styles.button}>
-              <Text>Sign Up</Text>
-            </View>
-          </TouchableOpacity>
-          <View style={{ marginTop: 10 }}>
-            <Text
-              style={{ fontWeight: '200', fontSize: 17, textAlign: 'center' }}
-              onPress={() => {
-                navigation.navigate('Sign In');
-              }}
-            >
-              Already have an account?
-            </Text>
-          </View>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    </TouchableWithoutFeedback>
+            Already have an account?
+          </Text>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
