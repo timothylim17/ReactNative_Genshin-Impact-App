@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const AUTH_TOKEN = 'genshin-impact::AUTH_TOKEN';
+import {
+  AUTH_TOKEN
+} from '@env';
 
 export const storeUserData = async user => {
   try {
