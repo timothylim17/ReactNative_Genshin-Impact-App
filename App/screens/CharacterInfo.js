@@ -51,10 +51,10 @@ export default class CharacterInfo extends React.Component {
     });
   };
 
-  // componentDidMount() {
-  //   const sentName = this.props.route.params.name;
-  //   this.getCharacterInfo({ name: sentName });
-  // }
+  componentDidMount() {
+    const sentName = this.props.route.params.name;
+    this.getCharacterInfo({ name: sentName });
+  }
 
   componentDidUpdate() {
     const { name } = this.props.route.params;

@@ -2,10 +2,10 @@ import React, { useState, useEffect, createContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import * as firebase from 'firebase';
-import { firebaseConfig } from 'genshin-impact-app/App/modules/utils';
-import MainStack from 'genshin-impact-app/App/navigation/MainStack';
-import AuthStack from 'genshin-impact-app/App/navigation/AuthStack';
+import * as firebase from "firebase";
+import { firebaseConfig } from "genshin-impact-app/App/modules/utils";
+import MainStack from "genshin-impact-app/App/navigation/MainStack";
+import AuthStack from "genshin-impact-app/App/navigation/AuthStack";
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
