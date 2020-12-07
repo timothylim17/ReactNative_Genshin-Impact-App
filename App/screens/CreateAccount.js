@@ -7,25 +7,11 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Keyboard,
-  TouchableWithoutFeedback,
-  Platform
+  TouchableWithoutFeedback
 } from "react-native";
-import {
-  IOS_CLIENT_ID,
-  ANDROID_CLIENT_ID,
-} from '@env';
 import { TextInput } from "react-native-gesture-handler";
 
 import { AuthContext } from 'genshin-impact-app/App/modules/navigation';
-
-// const isAndroid = () => Platform.OS === 'android',
-//   androidID = ANDROID_CLIENT_ID,
-//   iosID = IOS_CLIENT_ID;
-
-// const googleAuthConfig = {
-//   clientId: isAndroid() ? androidID : iosID,
-//   scopes: ['profile', 'email'],
-// };
 
 const styles = StyleSheet.create({
   container: {
@@ -70,8 +56,8 @@ const styles = StyleSheet.create({
 export default function CreateAccount({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = ('');
+
 
   const { signUp } = useContext(AuthContext);
 
@@ -119,7 +105,12 @@ export default function CreateAccount({ navigation }) {
           </Text>
           <TouchableOpacity
             style={{ width: '86%', marginTop: 10 }}
-            onPress={() => signUp(email, password)}
+            onPress={() => {
+              signUp(email, password)
+                .catch(e => {
+                  setErrorMessage(e);
+                });
+            }}
           >
             <View style={styles.button}>
               <Text>Sign Up</Text>

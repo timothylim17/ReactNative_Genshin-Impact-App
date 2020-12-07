@@ -18,34 +18,43 @@ export const AuthProvider = ({ children }) => {
         user,
         setUser,
         signIn: async (email, password) => {
-          firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(result => {
-              console.log('signIn result: ', result);
-            })
-            .catch(e => {
-              console.log('sign in failed: ', e);
-            });
+          // firebase
+          //   .auth()
+          //   .signInWithEmailAndPassword(email, password)
+          //   .then(result => {
+          //     console.log('signIn result: ', result);
+          //   })
+          //   .catch(e => {
+          //     console.log('sign in failed: ', e);
+          //   });
+          try {
+            await firebase.auth().signInWithEmailAndPassword(email, password);
+          } catch (e) {
+            console.error('sign in failed: ', e);
+          }
         },
         signUp: async (email, password) => {
-          firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(result => {
-              console.log('signUp result: ', result);
-            })
-            .catch(e => {
-              console.log('signUp failed: ', e);
-            });
+          // firebase
+          //   .auth()
+          //   .createUserWithEmailAndPassword(email, password)
+          //   .then(result => {
+          //     console.log('signUp result: ', result);
+          //   })
+          //   .catch(e => {
+          //     console.log('signUp failed: ', e);
+          //   });
+           try {
+            await firebase.auth().createUserWithEmailAndPassword(email, password);
+          } catch (e) {
+            console.error('sign up failed: ', e);
+          }
         }, 
         signOut: async() => {
-          firebase
-            .auth()
-            .signOut()
-            .catch(e => {
-              console.log('sign out failed: ', e);
-            });
+          try {
+            await firebase.auth().signOut();
+          } catch (e) {
+            console.error('logout failed: ', e)
+          }
         }
       }}
     >

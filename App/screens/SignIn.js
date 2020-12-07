@@ -8,12 +8,8 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
-  Platform
+  Alert
 } from "react-native";
-import {
-  IOS_CLIENT_ID,
-  ANDROID_CLIENT_ID,
-} from '@env';
 import { TextInput } from "react-native-gesture-handler";
 
 import { AuthContext } from 'genshin-impact-app/App/modules/navigation';
@@ -61,7 +57,9 @@ const styles = StyleSheet.create({
 export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
   const { signIn } = useContext(AuthContext);
+
 
   return (
     <TouchableWithoutFeedback
@@ -95,10 +93,25 @@ export default function SignIn({ navigation }) {
             value={password}
             onChangeText={credentials => setPassword(credentials)}
           />
-        </View>
+          </View>
+          <Text
+            style={{
+              fontSize: 18,
+              textAlign: 'center',
+              color: 'red',
+              width: '80%'
+            }}
+          >
+            {errorMessage}  
+          </Text>
         <TouchableOpacity
             style={{ width: '86%', marginTop: 10 }}
-            onPress={() => signIn(email, password)}
+            onPress={() => {
+              signIn(email, password)
+                .catch(e => {
+                  setErrorMessage(e);
+                });
+            }}
         >
           <View style={styles.button}>
             <Text>Sign In</Text>  
