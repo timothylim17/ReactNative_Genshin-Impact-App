@@ -62,6 +62,9 @@ export default function TierList({ navigation }) {
         <TouchableOpacity onPress={() => onPress("Amber")}>
           <Image style={styles.image} source={amber} />
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => onPress("Mona")}>
+          <Image style={styles.image} source={mona} />
+        </TouchableOpacity>
       </View>
     </View>
   );
