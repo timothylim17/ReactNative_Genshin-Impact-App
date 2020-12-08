@@ -1,4 +1,12 @@
 // All component imports go here
-import SignInButton from 'genshin-impact-app/App/components/SignInButton';
+import NewStatusInput from 'genshin-impact-app/App/components/NewStatusInput';
+import Status from 'genshin-impact-app/App/components/Status';
+import Button from 'genshin-impact-app/App/components/Button';
+import Header from 'genshin-impact-app/App/components/Header';
 
-export { SignInButton };
+export {
+  NewStatusInput,
+  Status,
+  Button,
+  Header
+};
