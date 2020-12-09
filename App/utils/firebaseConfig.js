@@ -9,7 +9,7 @@ import {
   MEASUREMENT_ID
 } from '@env';
 
-export const firebaseConfig = {
+const firebaseConfig = {
   apiKey: API_KEY,
   authDomain: AUTH_DOMAIN,
   databaseURL: DATABASE_URL,
@@ -19,4 +19,6 @@ export const firebaseConfig = {
   appId: APP_ID,
   measurementId: MEASUREMENT_ID,
 };
+
+export default firebaseConfig;
 

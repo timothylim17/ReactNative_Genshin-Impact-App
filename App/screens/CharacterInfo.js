@@ -1,8 +1,8 @@
 import React from "react";
-import { render } from "react-dom";
 import { View, Text } from "react-native";
 
 import { genshinApi } from "../utils/genshinApi";
+import { Initializing } from "genshin-impact-app/App/modules/screens";
 
 export default class CharacterInfo extends React.Component {
   state = {
@@ -15,6 +15,7 @@ export default class CharacterInfo extends React.Component {
     weapon: "",
     obtain: "",
     rarity: "",
+    loading: true,
   };
 
   handleError = () => {
@@ -51,17 +52,26 @@ export default class CharacterInfo extends React.Component {
     });
   };
 
-  componentDidMount() {
-    const { name } = this.props.route.params;
-    this.getCharacterInfo({ name });
-  }
-
   componentDidUpdate() {
     const { name } = this.props.route.params;
     this.getCharacterInfo({ name });
+
+    if (this.state.loading) this.setState({ loading: false });
   }
 
+  componentWillUnmount() {
+    const { name } = this.props.route.params;
+    this.getCharacterInfo({ name });
+
+    this.setState({ loading: true });
+  }
+
+
   render() {
+    const { name } = this.props.route.params;
+    if (name === undefined || this.state.loading === true) {
+      return <Initializing />;
+    }
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>Character Info!</Text>

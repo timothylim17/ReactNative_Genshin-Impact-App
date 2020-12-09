@@ -1,11 +1,8 @@
-import React, { useState, useEffect, createContext } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import * as firebase from 'firebase';
 import {
   SignIn,
-  CreateAccount,
-  Initializing
+  CreateAccount
 } from 'genshin-impact-app/App/modules/screens';
 
 const Stack = createStackNavigator();

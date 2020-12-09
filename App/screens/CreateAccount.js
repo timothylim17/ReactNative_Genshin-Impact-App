@@ -1,32 +1,15 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import {
   View,
   Text,
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  ActivityIndicator,
-  KeyboardAvoidingView,
-  Keyboard,
-  TouchableWithoutFeedback,
-  Platform
+  KeyboardAvoidingView
 } from "react-native";
-import * as Google from 'expo-google-app-auth';
-import * as firebase from 'firebase';
-import {
-  IOS_CLIENT_ID,
-  ANDROID_CLIENT_ID,
-} from '@env';
 import { TextInput } from "react-native-gesture-handler";
 
-const isAndroid = () => Platform.OS === 'android',
-  androidID = ANDROID_CLIENT_ID,
-  iosID = IOS_CLIENT_ID;
-
-const googleAuthConfig = {
-  clientId: isAndroid() ? androidID : iosID,
-  scopes: ['profile', 'email'],
-};
+import { AuthContext } from 'genshin-impact-app/App/modules/navigation';
 
 const styles = StyleSheet.create({
   container: {
@@ -68,209 +51,75 @@ const styles = StyleSheet.create({
   }
 });
 
-
-
-
 export default function CreateAccount({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = ('');
 
-  const onLoginSuccess = () => {
-    navigation.navigate('Home');
-  }
-
-  const onLoginFailure = e => {
-    setErrorMessage(e);
-    isLoading(false);
-  }
-
-  const renderLoading = () => {
-    if (isLoading) {
-      return (
-        <View>
-          <ActivityIndicator size="large" color="#000" />
-        </View>
-      )
-    }
-  }
-
-  // Sign in with Email
-  async function signInWithEmail() {
-    await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(result => {
-        console.log(result);
-        onLoginSuccess();
-      })
-      .catch(e => {
-        let errorCode = e.code;
-        let errorMessage = e.message;
-
-        if (errorCode == 'auth/weak-password')
-          onLoginFailure('Weak Password!');
-        else
-          onLoginFailure(errorMessage);
-      });
-  }
-
-  const isUserEqual = (googleUser, firebaseUser) => {
-    if (firebaseUser) {
-      var providerData = firebaseUser.providerData;
-      for (var i = 0; i < providerData.length; i++) {
-        if (providerData[i].providerData === firebase.auth.GoogleAuthProvider.PROVIDER_ID
-          && providerData[i].uid === googleUser.getBasicProfile().getId()) {
-          // No need to reauth Firebase Connection
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  const onSignIn = googleUser => {
-    console.log('Google Auth Response', googleUser);
-
-    var unsubscribe = firebase.auth().onAuthStateChanged(function (firebaseUser) {
-      unsubscribe();
-
-      // Check if already signed-in Firebase with the correct user
-      if (!isUserEqual(googleUser, firebaseUser)) {
-        // Build Firebase Credential with the Google ID token
-        var credential = firebase.auth.GoogleAuthProvider.credential(
-          googleUser.token,
-          googleUser.accessToken
-        );
-        // Sign In with credential from the Google User
-        firebase.auth().signInWithCredential(credential)
-          .then(result => {
-            console.log('user sign in');
-            if (result.additionalUserInfo.isNewUser) {
-              firebase.database()
-              .ref('/users' + result.user.uid)
-              .set({
-                gmail: result.user.email,
-                profile_picture: result.additionalUserInfo.profile_picture.locale,
-                first_name: result.additionalUserInfo.given_name,
-                last_name: result.additionalUserInfo.first_name,
-                created_at: Date.now()
-              })
-              .then(snapshot => {
-                console.log('firebase db: ', snapshot);
-              });
-            } else {
-              firebase.database()
-                .ref('/users' + result.user.uid)
-                .update({
-                  last_logged_in: Date.now()
-                });
-            }
-          })
-          .catch(e => {
-            // Print errors here
-            console.log('onSignIn Error: ', e);
-          });
-      } else {
-        console.log('User already signed in Firebase');
-      }
-    })
-  }
-
-  async function signInWithGoogleAsync() {
-    try {
-      const result = await Google.logInAsync(googleAuthConfig);
-
-      if (result.type === 'success') {
-        console.log('sign up result: ', result);
-        onSignIn(result);
-        return result.accessToken;
-      }
-    } catch ({ message }) {
-      alert('login: Error: ' + message);
-    }
-  }
+  const { signUp } = useContext(AuthContext);
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dimiss();
-      }}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
-          <Text style={{ fontSize: 32, fontWeight: "700", color: "#000", paddingTop: 40 }}>
-            Genshin Impact
-          </Text>
-          <View style={styles.form}>
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              placeholderTextColor="#b1b1b1"
-              returnKeyType="next"
-              textContentType="emailAddress"
-              keyboardType="email-address"
-              value={email}
-              onChangeText={account => setEmail(account)}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              placeholderTextColor="#b1b1b1"
-              returnKeyType="done"
-              textContentType="newPassword"
-              value={password}
-              onChangeText={credentials => setPassword(credentials)}
-            />
+    <SafeAreaView style={{ flex: 1 }}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <Text style={{ fontSize: 32, fontWeight: "700", color: "#000", paddingTop: 40 }}>
+          Genshin Impact
+        </Text>
+        <View style={styles.form}>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            placeholderTextColor="#b1b1b1"
+            returnKeyType="next"
+            textContentType="emailAddress"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={account => setEmail(account)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            placeholderTextColor="#b1b1b1"
+            returnKeyType="done"
+            textContentType="newPassword"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={credentials => setPassword(credentials)}
+          />
+        </View>
+        <Text
+          style={{
+            fontSize: 18,
+            textAlign: 'center',
+            color: 'red',
+            width: '80%'
+          }}
+        >
+          {errorMessage}  
+        </Text>
+        <TouchableOpacity
+          style={{ width: '86%', marginTop: 10 }}
+          onPress={() => {
+            signUp(email, password)
+              .catch(e => {
+                setErrorMessage(e);
+              });
+          }}
+        >
+          <View style={styles.button}>
+            <Text>Sign Up</Text>
           </View>
-          {renderLoading()}
+        </TouchableOpacity>
+        <View style={{ marginTop: 10 }}>
           <Text
-            style={{
-              fontSize: 18,
-              textAlign: 'center',
-              color: 'red',
-              width: '80%'
+            style={{ fontWeight: '200', fontSize: 17, textAlign: 'center' }}
+            onPress={() => {
+              navigation.navigate('Sign In');
             }}
           >
-            {errorMessage}  
+            Already have an account?
           </Text>
-          <TouchableOpacity
-            style={{ width: '86%', marginTop: 10 }}
-            onPress={() => signInWithEmail()}
-          >
-            <View style={styles.button}>
-              <Text>Sign Up</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{ width: '86%', marginTop: 10 }}
-            onPress={() => signInWithGoogleAsync()}
-          >
-            <View style={styles.googleButton}>
-              <Text
-                style={{
-                  letterSpacing: 0.5,
-                  fontSize: 16,
-                  color: '#707070'
-                }}
-              >
-                Continue with Google
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <View style={{ marginTop: 10 }}>
-            <Text
-              style={{ fontWeight: '200', fontSize: 17, textAlign: 'center' }}
-              onPress={() => {
-                navigation.navigate('Sign In');
-              }}
-            >
-              Already have an account?
-            </Text>
-          </View>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    </TouchableWithoutFeedback>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }

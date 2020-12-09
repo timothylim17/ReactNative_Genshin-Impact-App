@@ -1,17 +1,7 @@
-
 import * as firebase from 'firebase';
+import 'firebase/firestore';
 
 const currentUser = () => firebase.auth().currentUser.toJSON();
-
-// email sign-in anonymously
-// const signIn = () => {
-//   return firebase
-//     .auth()
-//     .signInAnonymously()
-//     .then(({user}) => {
-//       return user.updateProfile({displayName: uniqueNamesGenerator()});
-//     });
-// };
 
 const listenToMessages = threadId => {
   return firebase
@@ -111,7 +101,6 @@ const listenToThreadTracking = () => {
 
 export {
   currentUser,
-  signIn,
   createMessage,
   createNewThread,
   listenToMessages,
