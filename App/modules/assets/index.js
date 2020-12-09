@@ -1,4 +1,27 @@
-import * as Assets from "./assets";
-
-export default Assets;
-export * from "./assets";
+export default images = {
+  Amber: require("genshin-impact-app/App/assets/characters/amber.png"),
+  Barbara: require("genshin-impact-app/App/assets/characters/barbara.png"),
+  Beidou: require("genshin-impact-app/App/assets/characters/beidou.png"),
+  Bennett: require("genshin-impact-app/App/assets/characters/bennett.png"),
+  Chongyun: require("genshin-impact-app/App/assets/characters/chongyun.png"),
+  Diluc: require("genshin-impact-app/App/assets/characters/diluc.png"),
+  Diona: require("genshin-impact-app/App/assets/characters/diona.png"),
+  Fischl: require("genshin-impact-app/App/assets/characters/fischl.png"),
+  Jean: require("genshin-impact-app/App/assets/characters/jean.png"),
+  Kaeya: require("genshin-impact-app/App/assets/characters/kaeya.png"),
+  Keqing: require("genshin-impact-app/App/assets/characters/keqing.png"),
+  Klee: require("genshin-impact-app/App/assets/characters/klee.png"),
+  Lisa: require("genshin-impact-app/App/assets/characters/lisa.png"),
+  Mona: require("genshin-impact-app/App/assets/characters/mona.png"),
+  Ningguang: require("genshin-impact-app/App/assets/characters/ningguang.png"),
+  Qiqi: require("genshin-impact-app/App/assets/characters/qiqi.png"),
+  Razor: require("genshin-impact-app/App/assets/characters/razor.png"),
+  Sucrose: require("genshin-impact-app/App/assets/characters/sucrose.png"),
+  Tartaglia: require("genshin-impact-app/App/assets/characters/tartaglia.png"),
+  Venti: require("genshin-impact-app/App/assets/characters/venti.png"),
+  Xiangling: require("genshin-impact-app/App/assets/characters/xiangling.png"),
+  Xiao: require("genshin-impact-app/App/assets/characters/xiao.png"),
+  Xingqiu: require("genshin-impact-app/App/assets/characters/xingqiu.png"),
+  Xinyan: require("genshin-impact-app/App/assets/characters/xinyan.png"),
+  Zhongli: require("genshin-impact-app/App/assets/characters/zhongli.png"),
+};

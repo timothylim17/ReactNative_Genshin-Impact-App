@@ -1,33 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 
-import {
-  Amber,
-  Barbara,
-  Beidou,
-  Bennett,
-  Chongyun,
-  Diluc,
-  Diona,
-  Fischl,
-  Jean,
-  Kaeya,
-  Keqing,
-  Klee,
-  Lisa,
-  Mona,
-  Ningguang,
-  Qiqi,
-  Razor,
-  Sucrose,
-  Tartaglia,
-  Venti,
-  Xiangling,
-  Xiao,
-  Xingqiu,
-  Xinyan,
-  Zhongli,
-} from "genshin-impact-app/App/modules/assets";
+import images from "genshin-impact-app/App/modules/assets";
 
 const styles = StyleSheet.create({
   image: {
@@ -71,7 +45,6 @@ export default function TierList({ navigation }) {
 
   const printTier = (tier) => {
     var i;
-    //Option 2 (Semi Dynamic):
     let Tier = [];
     let output = [];
     if (tier === "S") Tier = STier;
@@ -88,7 +61,7 @@ export default function TierList({ navigation }) {
           style={styles.tier}
           onPress={() => onPress(name)}
         >
-          <Image style={styles.image} source={Xiao} />
+          <Image style={styles.image} source={images[name]} />
         </TouchableOpacity>
       );
 
@@ -96,50 +69,6 @@ export default function TierList({ navigation }) {
     }
 
     return output;
-
-    // Option 3 (Barely Dynamic):
-    // if (tier === "S") {
-    //   for (i = 0; i < STier.length; i++) {
-    //     // const pic = STier[i];
-    //     return (
-    //       <TouchableOpacity onPress={() => onPress(STier[i])}>
-    //         <Image style={styles.image} source={STier[i]} />
-    //       </TouchableOpacity>
-    //     );
-    //   }
-    // } else if (tier === "A") {
-    //   for (i = 0; i < ATier.length; i++) {
-    //     return (
-    //       <TouchableOpacity onPress={() => onPress(ATier[i])}>
-    //         <Image style={styles.image} source={ATier[i]} />
-    //       </TouchableOpacity>
-    //     );
-    //   }
-    // } else if (tier === "B") {
-    //   for (i = 0; i < BTier.length; i++) {
-    //     return (
-    //       <TouchableOpacity onPress={() => onPress(BTier[i])}>
-    //         <Image style={styles.image} source={BTier[i]} />
-    //       </TouchableOpacity>
-    //     );
-    //   }
-    // } else if (tier === "C") {
-    //   for (i = 0; i < CTier.length; i++) {
-    //     return (
-    //       <TouchableOpacity onPress={() => onPress(CTier[i])}>
-    //         <Image style={styles.image} source={CTier[i]} />
-    //       </TouchableOpacity>
-    //     );
-    //   }
-    // } else if (tier === "D") {
-    //   for (i = 0; i < DTier.length; i++) {
-    //     return (
-    //       <TouchableOpacity onPress={() => onPress(DTier[i])}>
-    //         <Image style={styles.image} source={DTier[i]} />
-    //       </TouchableOpacity>
-    //     );
-    //   }
-    // }
   };
 
   return (
