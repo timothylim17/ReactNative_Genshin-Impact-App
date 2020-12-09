@@ -1,78 +1,71 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 
 import { ThreadRow, Separator } from 'genshin-impact-app/App/modules/components';
+import { InitializingMessage } from 'genshin-impact-app/App/modules/screens';
 import { listenToThreads, listenToThreadTracking } from 'genshin-impact-app/App/firebase';
 
-export default class Threads extends Component {
-  state = {
-    threads: [],
-    threadTracking: {},
-  };
+export default function Threads({ navigation }) {
+  const [threads, setThreads] = useState([]);
+  const [threadsTracking, setThreadsTracking] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  componentDidMount() {
-    this.removeThreadListener = listenToThreads().onSnapshot(querySnapshot => {
-      const threads = querySnapshot.docs.map(doc => ({
-        _id: doc.id,
-        name: '',
-        latestMessage: {text: ''},
-        ...doc.data(),
-      }));
-
-      this.setState({threads});
+  useEffect(() => {
+    const unsubscribe = listenToThreads().onSnapshot(querySnapshot => {
+      const thread = querySnapshot.docs.map(doc => {
+        return {
+          _id: doc.id,
+          name: '',
+          latestMessage: { text: '' },
+          ...doc.data(),
+        };
+      });
+      
+      setThreads(thread);
+      console.log(thread);
+      
+      if (loading) setLoading(false);
     });
 
-    this.removeThreadListener = listenToThreadTracking().onSnapshot(
-      querySnapshot => {
-        this.setState({threadTracking: querySnapshot.data() || {}});
-      },
-    );
-  }
+    const unsubscribeListeners = listenToThreadTracking().onSnapshot(querySnapshot => {
+      setThreadsTracking(querySnapshot.data() || {});
+    });
 
-  componentWillUnmount() {
-    if (this.removeThreadListener) {
-      this.removeThreadListener();
+    return () => {
+      unsubscribe();
+      unsubscribeListeners();
     }
+  }, []);
 
-    if (this.removeThreadListener) {
-      this.removeThreadListener();
-    }
-  }
-
-  isThreadUnread = thread => {
-    const {threadTracking} = this.state;
-
-    // new message in thread sicne we last checked
-    // never viewed that thread before (unread)
+  const isThreadUnread = thread => {
     if (
-      !threadTracking[thread._id] ||
-      threadTracking[thread._id].lastRead < thread.latestMessage.createdAt
+      !threadsTracking[thread._id] ||
+      threadsTracking[thread._id].lastRead < thread.latestMessage.createdAt
     ) {
       return true;
     }
-
     return false;
-  };
-
-  render() {
-
-    const { navigation } = this.props;
-    return (
-      <FlatList
-        data={this.state.threads}
-        keyExtractor={item => item._id}
-        renderItem={({ item }) => (
-          <ThreadRow
-            {...item}
-            onPress={() => {
-              console.log('item', item);
-              navigation.navigate('Messages', { thread: item });
-            }}
-            unread={this.isThreadUnread(item)}
-          />
-        )}
-        ItemSeparatorComponent={() => <Separator />}
-      />
-    );
   }
+
+  if (loading) {
+    return <InitializingMessage />;
+  }
+
+  return (
+    <FlatList
+      data={threads}
+      keyExtractor={item => item._id}
+      renderItem={({ item }) => (
+        <ThreadRow
+          {...item}
+          onPress={() => {
+            console.log('item', item);
+            navigation.navigate('Messages', { thread: item });
+          }}
+          unread={isThreadUnread(item)}
+        />
+      )}
+      ItemSeparatorComponent={() => <Separator />}
+    />
+  );
 }

@@ -35,7 +35,7 @@ function MessagingStack() {
         name="Threads"
         component={Threads}
         options={({ navigation }) => ({
-          headerTitle: 'Message Threads',
+          headerTitle: 'Threads',
           headerRight: () => (
             <HeaderIcon
               iconName="add"
@@ -48,7 +48,7 @@ function MessagingStack() {
         name="Messages"
         component={Messages}
         options={({ navigation, route }) => ({
-          headerTitle: route.params?.thread ?? {}.name,
+          title: route.params.thread.name,
         })}
       />
       <Messaging.Screen

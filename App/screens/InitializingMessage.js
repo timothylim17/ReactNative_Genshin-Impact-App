@@ -13,19 +13,17 @@ const styles = StyleSheet.create({
 
 export default function InitializingMessage({ navigation }) {
   useEffect(() => {
-    this.removeAuthListener = firebase.auth().onAuthStateChanged(authUser => {
+    const removeAuthListener = () => firebase.auth().onAuthStateChanged(authUser => {
       if (!authUser) {
-        return navigation.navigate('Home');
+        // sign the user out
+        return firebase.auth().signOut();
       }
 
-      return navigation.navigate('Messaging');
+      // bring them to threads
+      return navigation.navigate('Threads');
     });
 
-    return () => {
-      if (this.removeAuthListener) {
-        this.removeAuthListener();
-      }
-    }
+    return () => removeAuthListener();
   }, []);
 
   return (
