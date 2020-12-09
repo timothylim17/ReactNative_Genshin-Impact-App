@@ -44,9 +44,9 @@ export default class CharacterInfo extends React.Component {
               obtain: response[i].obtain,
               rarity: response[i].rarity,
             });
-            // console.log("state:", this.state);
           }
         }
+        // console.log("state:", this.state);
       }
     });
   };
