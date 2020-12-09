@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 
 import { TextField, Button } from 'genshin-impact-app/App/modules/components';
 import { createNewThread } from 'genshin-impact-app/App/firebase';
 
-export default class NewThread extends React.Component {
+export default class NewThread extends Component {
   state = {
     name: '',
     loading: false,

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 
 import { ThreadRow, Separator } from 'genshin-impact-app/App/modules/components';
 import { listenToThreads, listenToThreadTracking } from 'genshin-impact-app/App/firebase';
 
-export default class Threads extends React.Component {
+export default class Threads extends Component {
   state = {
     threads: [],
     threadTracking: {},
@@ -12,23 +12,20 @@ export default class Threads extends React.Component {
 
   componentDidMount() {
     this.removeThreadListener = listenToThreads().onSnapshot(querySnapshot => {
-      // returns array of threads
-      const threads = querySnapshot.docs.map(doc => {
-        console.log(doc.id, doc.data());
-        return {
-          _id: doc.id,
-          name: '',
-          latestMessage: {text: ''},
-          ...doc.data(),
-        };
-      });
+      const threads = querySnapshot.docs.map(doc => ({
+        _id: doc.id,
+        name: '',
+        latestMessage: {text: ''},
+        ...doc.data(),
+      }));
+
+      console.log(threads);
 
       this.setState({threads});
     });
 
     this.removeThreadListener = listenToThreadTracking().onSnapshot(
       querySnapshot => {
-        console.log(querySnapshot.data());
         this.setState({threadTracking: querySnapshot.data() || {}});
       },
     );
@@ -47,8 +44,8 @@ export default class Threads extends React.Component {
   isThreadUnread = thread => {
     const {threadTracking} = this.state;
 
-    // new message in thread since last checked
-    // never viewed thread before (unread)
+    // new message in thread sicne we last checked
+    // never viewed that thread before (unread)
     if (
       !threadTracking[thread._id] ||
       threadTracking[thread._id].lastRead < thread.latestMessage.createdAt

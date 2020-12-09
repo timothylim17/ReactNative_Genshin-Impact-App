@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 
 import {
@@ -8,13 +8,14 @@ import {
   markThreadLastRead,
 } from 'genshin-impact-app/App/firebase';
 
-export default class Messages extends React.Component {
+export default class Messages extends Component {
   state = {
     messages: [],
   };
 
   componentDidMount() {
     const { thread } = this.props.route.params;
+    
     this.removeMessagesListener = listenToMessages(thread._id).onSnapshot(
       querySnapshot => {
         const messages = querySnapshot.docs.map(doc => {
@@ -45,7 +46,7 @@ export default class Messages extends React.Component {
   }
 
   componentWillUnmount() {
-    const {thread} = this.props.route.params;
+    const { thread } = this.props.route.params;
 
     // user last saw this message thread
     markThreadLastRead(thread._id);
@@ -57,7 +58,7 @@ export default class Messages extends React.Component {
   handleSend = async messages => {
     const text = messages[0].text;
     // Locates the thread being used to send a message.
-    const {thread} = this.props.route.params;
+    const { thread } = this.props.route.params;
 
     createMessage(thread._id, text);
   };
@@ -69,7 +70,9 @@ export default class Messages extends React.Component {
       <GiftedChat
         messages={this.state.messages}
         onSend={this.handleSend}
-        user={{_id: user.uid}}
+        user={{
+          _id: user.uid
+        }}
       />
     );
   }
