@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
 import {
-  MainStack,
+  RootStack,
   AuthStack,
   AuthContext
 } from 'genshin-impact-app/App/modules/navigation';
@@ -15,8 +15,8 @@ export default function Routes() {
   const [initializing, setInitializing] = useState(true);
 
    // handle user state changes
-  function onAuthStateChanged(user) {
-    setUser(user);
+  function onAuthStateChanged(currUser) {
+    setUser(currUser);
     if (initializing) setInitializing(false);
     setLoading(false);
   }
@@ -34,7 +34,7 @@ export default function Routes() {
 
   return (
     <NavigationContainer>
-      { user ? <MainStack /> : <AuthStack />}
+      { user ? <RootStack /> : <AuthStack />}
     </NavigationContainer>
   )
 

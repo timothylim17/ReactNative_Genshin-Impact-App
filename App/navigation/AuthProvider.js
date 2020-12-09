@@ -16,15 +16,40 @@ export const AuthProvider = ({ children }) => {
         user,
         setUser,
         signIn: async (email, password) => {
+          // sign in firebase and set displayName
           try {
-            await firebase.auth().signInWithEmailAndPassword(email, password);
+            await firebase
+              .auth()
+              .signInWithEmailAndPassword(email, password)
+              .then(({ user }) => {
+                // get the display name and email from object
+                let { displayName, email } = user;
+
+                // displayName is split from the @
+                displayName = email.split('@')[0];
+
+                // update user profile
+                user.updateProfile({ displayName });
+              })
           } catch (e) {
             console.error('sign in failed: ', e);
           }
         },
         signUp: async (email, password) => {
            try {
-            await firebase.auth().createUserWithEmailAndPassword(email, password);
+             await firebase
+               .auth()
+               .createUserWithEmailAndPassword(email, password)
+               .then(({ user }) => {
+                 // get the display name and email from object
+                 let { displayName, email } = user;
+              
+                 // displayName is split from the @
+                 displayName = email.split('@')[0];
+
+                 // update user profile
+                 user.updateProfile({ displayName });
+               });
           } catch (e) {
             console.error('sign up failed: ', e);
           }
@@ -35,7 +60,7 @@ export const AuthProvider = ({ children }) => {
           } catch (e) {
             console.error('logout failed: ', e)
           }
-        }
+        },
       }}
     >
       {children}
