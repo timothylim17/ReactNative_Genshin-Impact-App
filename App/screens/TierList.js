@@ -35,8 +35,8 @@ export default function TierList({ navigation }) {
     "Xiangling",
     "Zhongli",
   ];
-  const BTier = ["Barbara", "Beidou", "Chongyun", "Sucrose", "Xingyan"];
-  const CTier = ["Kaeya", "Lisa", "Noelle", "Traveler"];
+  const BTier = ["Barbara", "Beidou", "Chongyun", "Sucrose", "Xinyan"];
+  const CTier = ["Kaeya", "Lisa", "Noelle"];
   const DTier = ["Amber"];
 
   const onPress = (name) => {
@@ -74,18 +74,7 @@ export default function TierList({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Tier List!</Text>
-      <View style={styles.tier}>
-        {printTier("S")}
-        {/* <TouchableOpacity onPress={() => onPress("Diluc")}>
-            <Image style={styles.image} source={diluc} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => onPress("Amber")}>
-            <Image style={styles.image} source={amber} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => onPress("Mona")}>
-            <Image style={styles.image} source={mona} />
-          </TouchableOpacity> */}
-      </View>
+      <View style={styles.tier}>{printTier("S")}</View>
       <View style={styles.tier}>{printTier("A")}</View>
       <View style={styles.tier}>{printTier("B")}</View>
       <View style={styles.tier}>{printTier("C")}</View>

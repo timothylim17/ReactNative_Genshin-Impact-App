@@ -14,6 +14,7 @@ export default images = {
   Lisa: require("genshin-impact-app/App/assets/characters/lisa.png"),
   Mona: require("genshin-impact-app/App/assets/characters/mona.png"),
   Ningguang: require("genshin-impact-app/App/assets/characters/ningguang.png"),
+  Noelle: require("genshin-impact-app/App/assets/characters/noelle.png"),
   Qiqi: require("genshin-impact-app/App/assets/characters/qiqi.png"),
   Razor: require("genshin-impact-app/App/assets/characters/razor.png"),
   Sucrose: require("genshin-impact-app/App/assets/characters/sucrose.png"),
