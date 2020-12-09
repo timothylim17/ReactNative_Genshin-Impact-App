@@ -19,8 +19,6 @@ export default class Threads extends Component {
         ...doc.data(),
       }));
 
-      console.log(threads);
-
       this.setState({threads});
     });
 
@@ -57,16 +55,19 @@ export default class Threads extends Component {
   };
 
   render() {
+
+    const { navigation } = this.props;
     return (
       <FlatList
         data={this.state.threads}
         keyExtractor={item => item._id}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <ThreadRow
             {...item}
-            onPress={() =>
-              this.props.navigation.navigate('Messages', {thread: item})
-            }
+            onPress={() => {
+              console.log('item', item);
+              navigation.navigate('Messages', { thread: item });
+            }}
             unread={this.isThreadUnread(item)}
           />
         )}

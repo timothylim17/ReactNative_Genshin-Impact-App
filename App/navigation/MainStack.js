@@ -51,26 +51,18 @@ function MessagingStack() {
           headerTitle: route.params?.thread ?? {}.name,
         })}
       />
-      <Messaging.Screen name="NewThread" component={NewThreadStack} />
-      <Messaging.Screen name="InitializingMessage" component={InitializingMessage} />
-    </Messaging.Navigator>
-  );
-}
-
-function NewThreadStack() {
-  return (
-    <NewThreads.Navigator>
-      <NewThreads.Screen
+      <Messaging.Screen
         name="NewThread"
         component={NewThread}
         options={({ navigation }) => ({
-          headerTitle: 'New Thread',
+          headerTitle: "New Thread",
           headerRight: () => (
             <HeaderIcon iconName="close" onPress={() => navigation.pop()} />
           )
         })}
       />
-    </NewThreads.Navigator>
+      <Messaging.Screen name="InitializingMessage" component={InitializingMessage} />
+    </Messaging.Navigator>
   );
 }
 
