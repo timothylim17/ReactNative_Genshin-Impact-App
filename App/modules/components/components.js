@@ -1,12 +1,12 @@
 // All component imports go here
-import NewStatusInput from 'genshin-impact-app/App/components/NewStatusInput';
-import Status from 'genshin-impact-app/App/components/Status';
-import Button from 'genshin-impact-app/App/components/Button';
-import Header from 'genshin-impact-app/App/components/Header';
+import { ThreadRow, Separator } from 'genshin-impact-app/App/components/ThreadRow';
+import { TextField, Button } from 'genshin-impact-app/App/components/Form';
+import { HeaderIcon } from 'genshin-impact-app/App/components/HeaderIcon';
 
 export {
-  NewStatusInput,
-  Status,
+  ThreadRow,
+  Separator,
+  TextField,
   Button,
-  Header
+  HeaderIcon
 };

@@ -1,9 +1,7 @@
-
 import * as firebase from 'firebase';
+import 'firebase/firestore';
 
-const currentUser = () => {
-  firebase.auth().currentUser.toJSON();
-};
+const currentUser = () => firebase.auth().currentUser.toJSON();
 
 const listenToMessages = threadId => {
   return firebase

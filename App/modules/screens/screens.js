@@ -5,10 +5,9 @@ import Threads from "genshin-impact-app/App/screens/Threads";
 import TierList from "genshin-impact-app/App/screens/TierList";
 import Initializing from "genshin-impact-app/App/screens/Initializing";
 import CharacterInfo from "genshin-impact-app/App/screens/CharacterInfo";
-import Feed from "genshin-impact-app/App/screens/Feed";
-import NewStatus from "genshin-impact-app/App/screens/NewStatus";
-
-
+import Messages from "genshin-impact-app/App/screens/Messages";
+import NewThread from "genshin-impact-app/App/screens/NewThread";
+import InitializingMessage from "genshin-impact-app/App/screens/InitializingMessage";
 
 export {
   Home,
@@ -18,6 +17,7 @@ export {
   CreateAccount,
   Initializing,
   CharacterInfo,
-  Feed,
-  NewStatus
+  Messages,
+  NewThread,
+  InitializingMessage
 };

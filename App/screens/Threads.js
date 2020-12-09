@@ -1,57 +1,80 @@
-import React from 'react';
-import { FlatList, View, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { FlatList } from 'react-native';
 
-// import {
-//   Status,
-//   Separator,
-//   Button
-// } from 'genshin-impact-app/App/modules/components';
+import { ThreadRow, Separator } from 'genshin-impact-app/App/modules/components';
+import { listenToThreads, listenToThreadTracking } from 'genshin-impact-app/App/firebase';
 
+export default class Threads extends React.Component {
+  state = {
+    threads: [],
+    threadTracking: {},
+  };
 
-const Thread = ({ navigation }) => {
-  // const originalStatus = navigation.getParam('status', {});
-  // const { loading, data } = useQuery(requestResponses, {
-  //   variables: { _id: originalStatus._id },
-  // });
+  componentDidMount() {
+    this.removeThreadListener = listenToThreads().onSnapshot(querySnapshot => {
+      // returns array of threads
+      const threads = querySnapshot.docs.map(doc => {
+        console.log(doc.id, doc.data());
+        return {
+          _id: doc.id,
+          name: '',
+          latestMessage: {text: ''},
+          ...doc.data(),
+        };
+      });
 
-  // const [likeStatusFn] = useMutation(likeStatus);
+      this.setState({threads});
+    });
 
-  // if (loading) return null;
+    this.removeThreadListener = listenToThreadTracking().onSnapshot(
+      querySnapshot => {
+        console.log(querySnapshot.data());
+        this.setState({threadTracking: querySnapshot.data() || {}});
+      },
+    );
+  }
 
-  return (
-    // <FlatList
-    //   data={data.responses}
-    //   renderItem={({ item }) => (
-    //     <Status
-    //       {...item}
-    //       onHeartPress={() => likeStatusFn({ variables: { statusId: item._id}})}
-    //       indent={item._id !== originalStatus._id}
-    //     />
-    //   )}
-    //   ItemSeparatorComponent={() => <Separator />}
-    //   keyExtractor={item => item._id}
-    //   ListFooterComponent={
-    //     <View
-    //       style={{
-    //         flex: 1,
-    //         marginBottom: 60,
-    //         marginHorizontal: 30,
-    //         marginTop: 10,
-    //       }}
-    //     >
-    //       <Button
-    //         text="New Reply"
-    //         onPress={() =>
-    //           navigation.navigate('NewStatus', { parent: originalStatus })
-    //         }
-    //       />
-    //     </View>
-    //   }
-    // />
-    <View>
-      <Text>Threads!</Text>
-    </View>
-  );
-};
+  componentWillUnmount() {
+    if (this.removeThreadListener) {
+      this.removeThreadListener();
+    }
 
-export default Thread;
+    if (this.removeThreadListener) {
+      this.removeThreadListener();
+    }
+  }
+
+  isThreadUnread = thread => {
+    const {threadTracking} = this.state;
+
+    // new message in thread since last checked
+    // never viewed thread before (unread)
+    if (
+      !threadTracking[thread._id] ||
+      threadTracking[thread._id].lastRead < thread.latestMessage.createdAt
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
+  render() {
+    return (
+      <FlatList
+        data={this.state.threads}
+        keyExtractor={item => item._id}
+        renderItem={({item}) => (
+          <ThreadRow
+            {...item}
+            onPress={() =>
+              this.props.navigation.navigate('Messages', {thread: item})
+            }
+            unread={this.isThreadUnread(item)}
+          />
+        )}
+        ItemSeparatorComponent={() => <Separator />}
+      />
+    );
+  }
+}
