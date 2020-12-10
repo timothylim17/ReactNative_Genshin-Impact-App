@@ -1,18 +1,29 @@
 import React, { useContext } from "react";
-import { View, Text, Button } from "react-native";
+import { SafeAreaView, Text, Button, StyleSheet, ScrollView } from "react-native";
 import * as firebase from 'firebase';
 
 import { AuthContext } from 'genshin-impact-app/App/modules/navigation';
-// import { currentUser } from 'genshin-impact-app/App/firebase';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#222431'
+  },
+  text: {
+    color: '#fff'
+  }
+});
 
 
 export default function Home({ navigation }) {
   const { signOut } = useContext(AuthContext);
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home!</Text>
-      <Text>Hello {firebase.auth().currentUser.displayName}</Text>
-      <Button title="Sign out" onPress={() => signOut()} />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <Text style={styles.text}>Welcome {firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : ''}!</Text>
+      </ScrollView>
+    </SafeAreaView>
   );
 }

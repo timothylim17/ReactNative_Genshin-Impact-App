@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingBottom: 1.5,
     marginTop: 25.5,
+    color: '#fff'
   },
   button: {
     backgroundColor: '#3a559f',
@@ -96,7 +97,7 @@ export default function SignIn({ navigation }) {
             }}
         >
           <View style={styles.button}>
-            <Text>Sign In</Text>  
+            <Text style={{ color: '#fff'}}>Sign In</Text>  
           </View>
         </TouchableOpacity>
         <View style={{ marginTop: 10 }}>

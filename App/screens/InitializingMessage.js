@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#222431'
   }
 });
 
@@ -28,7 +29,7 @@ export default function InitializingMessage({ navigation }) {
 
   return (
     <View style={styles.container}>
-        <ActivityIndicator size="large" color="#000" />
+        <ActivityIndicator size="large" color="#fff" />
     </View>
   )
 }
