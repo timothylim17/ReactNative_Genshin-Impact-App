@@ -21,7 +21,6 @@ export default function NewThreads({ navigation }) {
       [
         {
           text: "OK",
-          onPress: () => console.log('user pressed OK')
         }
       ],
       { cancelable: false }
