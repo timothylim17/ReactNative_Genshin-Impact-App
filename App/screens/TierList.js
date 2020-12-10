@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 
 import images from "genshin-impact-app/App/modules/assets";
 
@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   tier: {
     flex: 1,
     flexDirection: "row",
+    marginTop: 20
   },
 });
 
@@ -64,7 +65,6 @@ export default function TierList({ navigation }) {
           <Image style={styles.image} source={images[name]} />
         </TouchableOpacity>
       );
-
       output[i] = temp;
     }
 
@@ -72,13 +72,13 @@ export default function TierList({ navigation }) {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <SafeAreaView style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: '#222431' }}>
       <Text>Tier List!</Text>
       <View style={styles.tier}>{printTier("S")}</View>
       <View style={styles.tier}>{printTier("A")}</View>
       <View style={styles.tier}>{printTier("B")}</View>
       <View style={styles.tier}>{printTier("C")}</View>
       <View style={styles.tier}>{printTier("D")}</View>
-    </View>
+    </SafeAreaView>
   );
 }

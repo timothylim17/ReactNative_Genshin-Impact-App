@@ -77,7 +77,7 @@ export default class CharacterInfo extends React.Component {
       return <Initializing />;
     }
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: '#222431' }}>
         <Text>Character Info!</Text>
         <Text>name: {this.state.name}</Text>
         <Text>gender: {this.state.gender}</Text>

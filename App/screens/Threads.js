@@ -53,19 +53,19 @@ export default function Threads({ navigation }) {
 
   return (
     <FlatList
-      data={threads}
-      keyExtractor={item => item._id}
-      renderItem={({ item }) => (
-        <ThreadRow
-          {...item}
-          onPress={() => {
-            console.log('item', item);
-            navigation.navigate('Messages', { thread: item });
-          }}
-          unread={isThreadUnread(item)}
-        />
-      )}
-      ItemSeparatorComponent={() => <Separator />}
-    />
+    data={threads}
+    keyExtractor={item => item._id}
+    renderItem={({ item }) => (
+      <ThreadRow
+        {...item}
+        onPress={() => {
+          console.log('item', item);
+          navigation.navigate('Messages', { thread: item });
+        }}
+        unread={isThreadUnread(item)}
+      />
+    )}
+    ItemSeparatorComponent={() => <Separator />}
+  />    
   );
 }

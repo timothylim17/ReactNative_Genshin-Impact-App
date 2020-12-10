@@ -60,6 +60,12 @@ function MessagingStack() {
         component={Threads}
         options={({ navigation }) => ({
           headerTitle: 'Threads',
+          headerTitleStyle: {
+            color: '#eee'
+          },
+          headerStyle: {
+            backgroundColor: '#222431',
+          },
           headerRight: () => (
             <HeaderIcon
               iconName="add"
@@ -80,6 +86,12 @@ function MessagingStack() {
         component={NewThread}
         options={({ navigation }) => ({
           headerTitle: "New Thread",
+          headerTitleStyle: {
+            color: '#eee'
+          },
+          headerStyle: {
+            backgroundColor: '#222431',
+          },
           headerRight: () => (
             <HeaderIcon iconName="close" onPress={() => navigation.pop()} />
           )

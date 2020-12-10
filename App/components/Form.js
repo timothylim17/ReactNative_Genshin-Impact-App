@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   button: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#20212c',
     textAlign: 'center',
     alignSelf: 'center',
     paddingHorizontal: 40,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonDisabled: {
-    backgroundColor: '#A6D5FA',
+    backgroundColor: '#222431',
   },
   buttonText: {
     color: '#fff',
