@@ -1,6 +1,8 @@
-export const genshinApi = () => {
+const genshinApi = () => {
   const path = "characters";
   return fetch(`https://genshinlist.com/api/${path}`).then((response) =>
     response.json()
   );
 };
+
+export default genshinApi;

@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 
-import { genshinApi } from "../utils/genshinApi";
+import { genshinApi } from "genshin-impact-app/App/modules/utils";
 import { Initializing } from "genshin-impact-app/App/modules/screens";
 
 export default class CharacterInfo extends React.Component {
@@ -15,10 +15,11 @@ export default class CharacterInfo extends React.Component {
     weapon: "",
     obtain: "",
     rarity: "",
-    loading: true,
+    loading: true
   };
 
   handleError = () => {
+    this.setState({ loading: true });
     Alert.alert("No location data found!", "Please try again", [
       {
         text: "Okay",
@@ -52,24 +53,27 @@ export default class CharacterInfo extends React.Component {
     });
   };
 
+  componentDidMount() {
+    const { name } = this.props.route.params;
+    this.getCharacterInfo({ name });
+
+    this.setState({ loading: false });
+  }
+
   componentDidUpdate() {
     const { name } = this.props.route.params;
     this.getCharacterInfo({ name });
-
-    if (this.state.loading) this.setState({ loading: false });
   }
 
-  componentWillUnmount() {
-    const { name } = this.props.route.params;
-    this.getCharacterInfo({ name });
-
-    this.setState({ loading: true });
+  conmponentWillUnmount() {
+    this.handleError();
   }
-
 
   render() {
     const { name } = this.props.route.params;
-    if (name === undefined || this.state.loading === true) {
+    const { loading } = this.state;
+
+    if (loading || name === 'undefined')  {
       return <Initializing />;
     }
     return (
