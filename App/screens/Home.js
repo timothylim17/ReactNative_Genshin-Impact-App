@@ -11,8 +11,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#222431'
   },
-  text: {
-    color: '#fff'
+  welcomeUserText: {
+    marginTop: 20,
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20
   }
 });
 
@@ -22,7 +25,7 @@ export default function Home({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Text style={styles.text}>Welcome {firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : ''}!</Text>
+        <Text style={styles.welcomeUserText}>Welcome {firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : ''}!</Text>
       </ScrollView>
     </SafeAreaView>
   );
