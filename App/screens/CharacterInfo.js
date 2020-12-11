@@ -1,21 +1,55 @@
 import React from "react";
-import { View, Text, Alert, StyleSheet, Image } from "react-native";
+import { View, Text, Alert, StyleSheet, Image, Dimensions, SafeAreaView, ScrollView } from "react-native";
 
 import { portrait, devNotes } from "genshin-impact-app/App/modules/assets";
 import { genshinApi } from "genshin-impact-app/App/modules/utils";
 import { Initializing } from "genshin-impact-app/App/modules/screens";
 
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#222431",
   },
-  characterInfoView: {},
+  characterView: {
+    marginTop: 40,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  characterInfoView: {
+    marginTop: 20,
+    justifyContent: 'center',
+    paddingVertical: 10,
+    alignItems: 'center',
+    borderRadius: 10,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    backgroundColor: '#20212c',
+    marginHorizontal: 5
+  },
+  devNotesView: {
+    marginTop: 20,
+    justifyContent: 'center',
+    padding: 20,
+    alignItems: 'center',
+    borderRadius: 10,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    backgroundColor: '#20212c',
+    marginHorizontal: 5
+  },
   text: {
     color: "#eee",
+    fontSize: 15
   },
+  characterBackgroundImage: {
+    marginTop: 20,
+    height: deviceHeight / 2,
+    width: deviceWidth / 2,
+  }
 });
 
 export default class CharacterInfo extends React.Component {
@@ -30,7 +64,6 @@ export default class CharacterInfo extends React.Component {
     obtain: "",
     rarity: "",
     devNotes: "",
-    bgImage: "",
     loading: true,
   };
 
@@ -65,10 +98,13 @@ export default class CharacterInfo extends React.Component {
             });
           }
         }
-        // console.log("state:", this.state);
       }
     });
   };
+
+  capitalizeFirstLetter = string => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   componentDidMount() {
     const { name } = this.props.route.params;
@@ -94,18 +130,27 @@ export default class CharacterInfo extends React.Component {
       return <Initializing />;
     }
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>Character Info!</Text>
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={{ height: '100%' }}>
+          <View style={styles.characterView}>
+            <Text style={[styles.text, {fontWeight: 'bold', fontSize: 35, textAlign: "center"}]}>{this.state.name}</Text>
+            <Image style={styles.characterBackgroundImage} source={portrait[this.state.name]} />
+            <Text style={[styles.text, {fontSize: 15, paddingHorizontal: 10, marginTop: 30}]}>"{this.capitalizeFirstLetter(this.state.description)}"</Text>
+          </View>
+          <Text style={[styles.text, { fontWeight: 'bold', fontSize: 25, marginTop: 45, paddingHorizontal: 10}]}>Overview</Text>
         <View style={styles.characterInfoView}>
-          <Text style={styles.text}>name: {this.state.name}</Text>
-          <Text style={styles.text}>gender: {this.state.gender}</Text>
-          <Text style={styles.text}>vision: {this.state.vision}</Text>
-          <Text style={styles.text}>weapon: {this.state.weapon}</Text>
-          <Text style={styles.text}>rarity: {this.state.rarity}</Text>
-          <Text style={styles.text}>devNotes: {this.state.devNotes}</Text>
-          <Image source={portrait[this.state.name]} />
+          <Text style={styles.text}>Sex: {this.capitalizeFirstLetter(this.state.gender)}</Text>
+          <Text style={styles.text}>Vision: {this.capitalizeFirstLetter(this.state.vision)}</Text>
+          <Text style={styles.text}>Weapon: {this.capitalizeFirstLetter(this.state.weapon)}</Text>
+          <Text style={styles.text}>Birthday: {this.capitalizeFirstLetter(this.state.birthday)}</Text>
+          <Text style={styles.text}>Rarity: {this.state.rarity} Star</Text>
+          </View>
+        <Text style={[styles.text, { marginTop: 20, fontSize: 25, fontWeight: 'bold', paddingHorizontal: 10}]}>Developer's Insights</Text>
+        <View style={styles.devNotesView}>
+            <Text style={styles.text}>{this.state.devNotes}</Text>  
         </View>
-      </View>
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }

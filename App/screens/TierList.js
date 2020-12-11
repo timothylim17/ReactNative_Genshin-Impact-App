@@ -10,7 +10,6 @@ import {
 } from "react-native";
 
 import { images } from "genshin-impact-app/App/modules/assets";
-import { Separator } from "genshin-impact-app/App/modules/components";
 
 const styles = StyleSheet.create({
   container: {
