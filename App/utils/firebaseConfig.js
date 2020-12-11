@@ -6,8 +6,8 @@ import {
   STORAGE_BUCKET,
   MESSAGING_SENDER_ID,
   APP_ID,
-  MEASUREMENT_ID
-} from '@env';
+  MEASUREMENT_ID,
+} from "@env";
 
 const firebaseConfig = {
   apiKey: API_KEY,
@@ -21,4 +21,3 @@ const firebaseConfig = {
 };
 
 export default firebaseConfig;
-

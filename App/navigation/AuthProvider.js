@@ -1,5 +1,5 @@
-import React, { useState, createContext } from 'react';
-import * as firebase from 'firebase';
+import React, { useState, createContext } from "react";
+import * as firebase from "firebase";
 
 /**
  * This provider allows
@@ -26,39 +26,39 @@ export const AuthProvider = ({ children }) => {
                 let { displayName, email } = user;
 
                 // displayName is split from the @
-                displayName = email.split('@')[0];
+                displayName = email.split("@")[0];
 
                 // update user profile
                 user.updateProfile({ displayName });
-              })
+              });
           } catch (e) {
-            console.error('sign in failed: ', e);
+            console.error("sign in failed: ", e);
           }
         },
         signUp: async (email, password) => {
-           try {
-             await firebase
-               .auth()
-               .createUserWithEmailAndPassword(email, password)
-               .then(({ user }) => {
-                 // get the display name and email from object
-                 let { displayName, email } = user;
-              
-                 // displayName is split from the @
-                 displayName = email.split('@')[0];
+          try {
+            await firebase
+              .auth()
+              .createUserWithEmailAndPassword(email, password)
+              .then(({ user }) => {
+                // get the display name and email from object
+                let { displayName, email } = user;
 
-                 // update user profile
-                 user.updateProfile({ displayName });
-               });
+                // displayName is split from the @
+                displayName = email.split("@")[0];
+
+                // update user profile
+                user.updateProfile({ displayName });
+              });
           } catch (e) {
-            console.error('sign up failed: ', e);
+            console.error("sign up failed: ", e);
           }
-        }, 
-        signOut: async() => {
+        },
+        signOut: async () => {
           try {
             await firebase.auth().signOut();
           } catch (e) {
-            console.error('logout failed: ', e)
+            console.error("logout failed: ", e);
           }
         },
       }}

@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, Alert, StyleSheet } from "react-native";
+import { View, Text, Alert, StyleSheet, Image } from "react-native";
 
+import { portrait, devNotes } from "genshin-impact-app/App/modules/assets";
 import { genshinApi } from "genshin-impact-app/App/modules/utils";
 import { Initializing } from "genshin-impact-app/App/modules/screens";
 
@@ -9,14 +10,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: '#222431',
+    backgroundColor: "#222431",
   },
-  characterInfoView: {
-
-  },
+  characterInfoView: {},
   text: {
-    color: '#eee'
-  }
+    color: "#eee",
+  },
 });
 
 export default class CharacterInfo extends React.Component {
@@ -30,8 +29,9 @@ export default class CharacterInfo extends React.Component {
     weapon: "",
     obtain: "",
     rarity: "",
+    devNotes: "",
     bgImage: "",
-    loading: true
+    loading: true,
   };
 
   handleError = () => {
@@ -61,6 +61,7 @@ export default class CharacterInfo extends React.Component {
               weapon: response[i].weapon,
               obtain: response[i].obtain,
               rarity: response[i].rarity,
+              devNotes: devNotes[response[i].name],
             });
           }
         }
@@ -89,7 +90,7 @@ export default class CharacterInfo extends React.Component {
     const { name } = this.props.route.params;
     const { loading } = this.state;
 
-    if (loading || name === 'undefined')  {
+    if (loading || name === "undefined") {
       return <Initializing />;
     }
     return (
@@ -101,6 +102,8 @@ export default class CharacterInfo extends React.Component {
           <Text style={styles.text}>vision: {this.state.vision}</Text>
           <Text style={styles.text}>weapon: {this.state.weapon}</Text>
           <Text style={styles.text}>rarity: {this.state.rarity}</Text>
+          <Text style={styles.text}>devNotes: {this.state.devNotes}</Text>
+          <Image source={portrait[this.state.name]} />
         </View>
       </View>
     );

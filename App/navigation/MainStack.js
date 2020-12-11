@@ -1,5 +1,10 @@
 import React, { useContext } from "react";
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItem,
+  DrawerItemList,
+} from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   Home,
@@ -8,10 +13,10 @@ import {
   CharacterInfo,
   NewThread,
   Messages,
-  InitializingMessage
-} from 'genshin-impact-app/App/modules/screens';
-import { HeaderIcon } from 'genshin-impact-app/App/modules/components';
-import { AuthContext } from 'genshin-impact-app/App/modules/navigation';
+  InitializingMessage,
+} from "genshin-impact-app/App/modules/screens";
+import { HeaderIcon } from "genshin-impact-app/App/modules/components";
+import { AuthContext } from "genshin-impact-app/App/modules/navigation";
 
 const Root = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -23,10 +28,10 @@ function SignOutButton(props) {
 
   return (
     <DrawerContentScrollView {...props}>
-      <DrawerItemList style={{ color: '#fff' }} {...props} />
+      <DrawerItemList style={{ color: "#fff" }} {...props} />
       <DrawerItem
         label="Sign Out"
-        labelStyle={{ color: '#fff'}}
+        labelStyle={{ color: "#fff" }}
         onPress={() => signOut()}
       />
     </DrawerContentScrollView>
@@ -38,10 +43,10 @@ function MainStack() {
     <Drawer.Navigator
       initialRouteName="Home"
       drawerStyle={{
-        backgroundColor: '#222431',
+        backgroundColor: "#222431",
       }}
       drawerContentOptions={{
-        labelStyle: { color: '#fff'}
+        labelStyle: { color: "#fff" },
       }}
       drawerContent={(props) => <SignOutButton {...props} />}
     >
@@ -59,17 +64,17 @@ function MessagingStack() {
         name="Threads"
         component={Threads}
         options={({ navigation }) => ({
-          headerTitle: 'Threads',
+          headerTitle: "Threads",
           headerTitleStyle: {
-            color: '#eee'
+            color: "#eee",
           },
           headerStyle: {
-            backgroundColor: '#222431',
+            backgroundColor: "#222431",
           },
           headerRight: () => (
             <HeaderIcon
               iconName="add"
-              onPress={() => navigation.navigate('NewThread')}
+              onPress={() => navigation.navigate("NewThread")}
             />
           ),
         })}
@@ -80,10 +85,10 @@ function MessagingStack() {
         options={({ navigation, route }) => ({
           title: route.params.thread.name,
           headerStyle: {
-            backgroundColor: '#222431',
+            backgroundColor: "#222431",
           },
           headerTitleStyle: {
-            color: '#eee'
+            color: "#eee",
           },
         })}
       />
@@ -93,17 +98,20 @@ function MessagingStack() {
         options={({ navigation }) => ({
           headerTitle: "New Thread",
           headerTitleStyle: {
-            color: '#eee'
+            color: "#eee",
           },
           headerStyle: {
-            backgroundColor: '#222431',
+            backgroundColor: "#222431",
           },
           headerRight: () => (
             <HeaderIcon iconName="close" onPress={() => navigation.pop()} />
-          )
+          ),
         })}
       />
-      <Messaging.Screen name="InitializingMessage" component={InitializingMessage} />
+      <Messaging.Screen
+        name="InitializingMessage"
+        component={InitializingMessage}
+      />
     </Messaging.Navigator>
   );
 }
@@ -121,12 +129,12 @@ export default function RootStack() {
       <Root.Screen
         name="Character Info"
         component={CharacterInfo}
-        options={({ navigation}) => ({
+        options={({ navigation }) => ({
           headerStyle: {
-            backgroundColor: '#222431'
+            backgroundColor: "#222431",
           },
           headerTitleStyle: {
-            color: '#eee'
+            color: "#eee",
           },
         })}
       />
