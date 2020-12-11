@@ -1,6 +1,8 @@
-import React from "react";
-import { SafeAreaView, Text, TouchableOpacity, StyleSheet, ScrollView, View } from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView, Text, TouchableOpacity, StyleSheet, ScrollView, Modal } from "react-native";
 import * as firebase from 'firebase';
+
+import { EmbeddedWebView } from 'genshin-impact-app/App/modules/components';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
 
 
 export default function Home({ navigation }) {
-
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -49,11 +51,24 @@ export default function Home({ navigation }) {
         >
           <Text style={styles.text}>Go to Tier List!</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.optionsView}
           onPress={() => console.log('TODO')}
         >
           <Text style={styles.text}>Webview to Genshin.gg!</Text>
+        </TouchableOpacity> */}
+        <TouchableOpacity
+          style={styles.optionsView}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.text}>Webview to Genshin.gg!</Text>
+          <Modal animationType="slide" tansparent visible={modalVisible}>
+            <TouchableOpacity
+              style={{ flex: 1 }}
+              onPress={() => setModalVisible(false)}
+            />
+            <EmbeddedWebView />
+          </Modal>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
