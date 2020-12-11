@@ -48,9 +48,6 @@ export default function SignIn({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#222431' }}>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
-        {/* <Text style={{ fontSize: 32, fontWeight: "700", color: "#000", paddingTop: 40 }}>
-          Genshin Impact
-        </Text> */}
         <Image
           source={require('../assets/icons/genshin-logo.png')}
           resizeMode="center"

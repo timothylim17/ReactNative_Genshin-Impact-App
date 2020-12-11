@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: '#222431',
   },
+  characterInfoView: {
+
+  },
   text: {
     color: '#eee'
   }
@@ -92,11 +95,13 @@ export default class CharacterInfo extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Character Info!</Text>
-        <Text style={styles.text}>name: {this.state.name}</Text>
-        <Text style={styles.text}>gender: {this.state.gender}</Text>
-        <Text style={styles.text}>vision: {this.state.vision}</Text>
-        <Text style={styles.text}>weapon: {this.state.weapon}</Text>
-        <Text style={styles.text}>rarity: {this.state.rarity}</Text>
+        <View style={styles.characterInfoView}>
+          <Text style={styles.text}>name: {this.state.name}</Text>
+          <Text style={styles.text}>gender: {this.state.gender}</Text>
+          <Text style={styles.text}>vision: {this.state.vision}</Text>
+          <Text style={styles.text}>weapon: {this.state.weapon}</Text>
+          <Text style={styles.text}>rarity: {this.state.rarity}</Text>
+        </View>
       </View>
     );
   }
