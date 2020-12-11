@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 
 import images from "genshin-impact-app/App/modules/assets";
+import { Separator } from "genshin-impact-app/App/modules/components";
 
 const styles = StyleSheet.create({
   container: {
@@ -17,11 +18,12 @@ const styles = StyleSheet.create({
   tierView: {
     flexDirection: 'row',
     backgroundColor: '#20212c',
-    borderRadius: 8,
+    borderRadius: 10,
+    borderWidth: 1,
     justifyContent: "center",
     alignItems: 'center',
-    paddingHorizontal: 10,
-    marginTop: 30,
+    paddingHorizontal: 15,
+    marginBottom: 30,
     height: 100,
     width: 400
   },
@@ -34,6 +36,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 30,
     fontWeight: "bold"
+  },
+  textContainer: {
+    marginVertical: 40,
+    paddingBottom: 20,
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
   },
   text: {
     color: '#eee',
@@ -97,9 +105,9 @@ export default function TierList({ navigation }) {
     return output;
   };
 
-  const RenderTierView = ({ children }) => {
+  const RenderTierView = ({ children, style, tier }) => {
     return (
-      <View style={styles.tierView}>
+      <View style={[styles.tierView, style]}>
         {children}
       </View>
     );
@@ -108,12 +116,20 @@ export default function TierList({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titleText}>Tier List</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>This is a tier list based on the Genshin.gg website. Expect the list to change as the game updates.</Text>
+      </View>
       <ScrollView style={{ flex: 1 }}>
-        <RenderTierView>{ printTier("S") }</RenderTierView>
-        <RenderTierView>{printTier("A")}</RenderTierView> 
-        <RenderTierView>{printTier("B")}</RenderTierView> 
-        <RenderTierView>{printTier("C")}</RenderTierView> 
-        <RenderTierView>{printTier("D")}</RenderTierView> 
+        <Text style={styles.text}>S Tier</Text>
+        <RenderTierView style={{ borderColor: '#ff7f7f' }}>{printTier("S")}</RenderTierView>
+        <Text style={styles.text}>A Tier</Text>
+        <RenderTierView style={{ borderColor: '#ffbf7f' }}>{printTier("A")}</RenderTierView> 
+        <Text style={styles.text}>B Tier</Text>
+        <RenderTierView style={{ borderColor: '#ffff7f' }}>{printTier("B")}</RenderTierView> 
+        <Text style={styles.text}>C Tier</Text>
+        <RenderTierView style={{ borderColor: '#bfff7f' }}>{printTier("C")}</RenderTierView>
+        <Text style={styles.text}>D Tier</Text>
+        <RenderTierView style={{ borderColor: '#7fff7f'}}>{printTier("D")}</RenderTierView> 
       </ScrollView>
     </SafeAreaView>
   );

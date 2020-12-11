@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
 
 export default function Home({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -51,12 +52,6 @@ export default function Home({ navigation }) {
         >
           <Text style={styles.text}>Go to Tier List!</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity
-          style={styles.optionsView}
-          onPress={() => console.log('TODO')}
-        >
-          <Text style={styles.text}>Webview to Genshin.gg!</Text>
-        </TouchableOpacity> */}
         <TouchableOpacity
           style={styles.optionsView}
           onPress={() => setModalVisible(true)}

@@ -79,6 +79,12 @@ function MessagingStack() {
         component={Messages}
         options={({ navigation, route }) => ({
           title: route.params.thread.name,
+          headerStyle: {
+            backgroundColor: '#222431',
+          },
+          headerTitleStyle: {
+            color: '#eee'
+          },
         })}
       />
       <Messaging.Screen
