@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { TextField, Button } from 'genshin-impact-app/App/modules/components';
 import { createNewThread } from 'genshin-impact-app/App/firebase';
 
-export default function NewThreads({ navigation }) {
+export default function NewThreads() {
+  const navigation = useNavigation();
   const [roomName, setRoomName] = useState('');
 
   const handlePress = () => {
