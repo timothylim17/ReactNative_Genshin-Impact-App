@@ -49,6 +49,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     height: deviceHeight / 2,
     width: deviceWidth / 2,
+  },
+  characterInfoText: {
+    paddingBottom: 5
   }
 });
 
@@ -139,11 +142,12 @@ export default class CharacterInfo extends React.Component {
           </View>
           <Text style={[styles.text, { fontWeight: 'bold', fontSize: 25, marginTop: 45, paddingHorizontal: 10}]}>Overview</Text>
         <View style={styles.characterInfoView}>
-          <Text style={styles.text}>Sex: {this.capitalizeFirstLetter(this.state.gender)}</Text>
-          <Text style={styles.text}>Vision: {this.capitalizeFirstLetter(this.state.vision)}</Text>
-          <Text style={styles.text}>Weapon: {this.capitalizeFirstLetter(this.state.weapon)}</Text>
-          <Text style={styles.text}>Birthday: {this.capitalizeFirstLetter(this.state.birthday)}</Text>
-          <Text style={styles.text}>Rarity: {this.state.rarity} Star</Text>
+          <Text style={[styles.text, styles.characterInfoText]}>Sex: {this.capitalizeFirstLetter(this.state.gender)}</Text>
+          <Text style={[styles.text, styles.characterInfoText]}>Vision: {this.capitalizeFirstLetter(this.state.vision)}</Text>
+          <Text style={[styles.text, styles.characterInfoText]}>Weapon: {this.capitalizeFirstLetter(this.state.weapon)}</Text>
+          <Text style={[styles.text, styles.characterInfoText]}>Birthday: {this.capitalizeFirstLetter(this.state.birthday)}</Text>
+          <Text style={[styles.text, styles.characterInfoText]}>How to Obtain: {this.capitalizeFirstLetter(this.state.obtain)}</Text>
+          <Text style={[styles.text, styles.characterInfoText]}>Rarity: {this.state.rarity} Star</Text>
           </View>
         <Text style={[styles.text, { marginTop: 20, fontSize: 25, fontWeight: 'bold', paddingHorizontal: 10}]}>Developer's Insights</Text>
         <View style={styles.devNotesView}>
