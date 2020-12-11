@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { ThreadRow, Separator } from 'genshin-impact-app/App/modules/components';
 import { InitializingMessage } from 'genshin-impact-app/App/modules/screens';
 import { listenToThreads, listenToThreadTracking } from 'genshin-impact-app/App/firebase';
 
-export default function Threads({ navigation }) {
+export default function Threads() {
   const [threads, setThreads] = useState([]);
   const [threadsTracking, setThreadsTracking] = useState({});
   const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const unsubscribe = listenToThreads().onSnapshot(querySnapshot => {
@@ -53,19 +55,16 @@ export default function Threads({ navigation }) {
 
   return (
     <FlatList
-      data={threads}
-      keyExtractor={item => item._id}
-      renderItem={({ item }) => (
-        <ThreadRow
-          {...item}
-          onPress={() => {
-            console.log('item', item);
-            navigation.navigate('Messages', { thread: item });
-          }}
-          unread={isThreadUnread(item)}
-        />
-      )}
-      ItemSeparatorComponent={() => <Separator />}
-    />
+    data={threads}
+    keyExtractor={item => item._id}
+    renderItem={({ item }) => (
+      <ThreadRow
+        {...item}
+        onPress={() => navigation.navigate('Messages', { thread: item })}
+        unread={isThreadUnread(item)}
+      />
+    )}
+    ItemSeparatorComponent={() => <Separator />}
+  />    
   );
 }

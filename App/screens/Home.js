@@ -1,18 +1,71 @@
-import React, { useContext } from "react";
-import { View, Text, Button } from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView, Text, TouchableOpacity, StyleSheet, ScrollView, Modal } from "react-native";
 import * as firebase from 'firebase';
 
-import { AuthContext } from 'genshin-impact-app/App/modules/navigation';
-// import { currentUser } from 'genshin-impact-app/App/firebase';
+import { EmbeddedWebView } from 'genshin-impact-app/App/modules/components';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#222431'
+  },
+  welcomeUserText: {
+    marginVertical: 90,
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 30
+  },
+  text: {
+    color: '#fff',
+  },
+  optionsView: {
+    marginTop: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+    backgroundColor: '#20212c',
+    paddingHorizontal: 110,
+    height: 140,
+  }
+});
 
 
 export default function Home({ navigation }) {
-  const { signOut } = useContext(AuthContext);
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home!</Text>
-      <Text>Hello {firebase.auth().currentUser.displayName}</Text>
-      <Button title="Sign out" onPress={() => signOut()} />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <Text style={styles.welcomeUserText}>Welcome {firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : ''}!</Text>
+        <TouchableOpacity
+          style={styles.optionsView}
+          onPress={() => navigation.navigate('Threads')}
+        >
+          <Text style={styles.text}>Go to Threads!</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.optionsView}
+          onPress={() => navigation.navigate('Tier List')}
+        >
+          <Text style={styles.text}>Go to Tier List!</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.optionsView}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.text}>Webview to Genshin.gg!</Text>
+          <Modal animationType="slide" tansparent visible={modalVisible}>
+            <TouchableOpacity
+              style={{ flex: 1 }}
+              onPress={() => setModalVisible(false)}
+            />
+            <EmbeddedWebView />
+          </Modal>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
   );
 }

@@ -5,7 +5,8 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Image
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
@@ -19,10 +20,6 @@ const styles = StyleSheet.create({
   },
   form: {
     width: '86%',
-    marginTop: 15,
-  },
-  logo: {
-    marginTop: 20
   },
   input: {
     fontSize: 20,
@@ -30,6 +27,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingBottom: 1.5,
     marginTop: 25.5,
+    color: '#fff'
   },
   button: {
     backgroundColor: '#3a559f',
@@ -59,11 +57,9 @@ export default function CreateAccount({ navigation }) {
   const { signUp } = useContext(AuthContext);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#222431' }}>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
-        <Text style={{ fontSize: 32, fontWeight: "700", color: "#000", paddingTop: 40 }}>
-          Genshin Impact
-        </Text>
+        <Image resizeMode="center" source={require('../assets/icons/genshin-logo.png')} />
         <View style={styles.form}>
           <TextInput
             style={styles.input}
@@ -106,12 +102,12 @@ export default function CreateAccount({ navigation }) {
           }}
         >
           <View style={styles.button}>
-            <Text>Sign Up</Text>
+            <Text style={{ color: '#fff'}}>Sign Up</Text>
           </View>
         </TouchableOpacity>
         <View style={{ marginTop: 10 }}>
           <Text
-            style={{ fontWeight: '200', fontSize: 17, textAlign: 'center' }}
+            style={{ fontWeight: '200', fontSize: 17, textAlign: 'center', color: '#fff' }}
             onPress={() => {
               navigation.navigate('Sign In');
             }}

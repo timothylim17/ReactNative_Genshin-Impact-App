@@ -1,8 +1,23 @@
 import React from "react";
-import { View, Text, Alert } from "react-native";
+import { View, Text, Alert, StyleSheet } from "react-native";
 
 import { genshinApi } from "genshin-impact-app/App/modules/utils";
 import { Initializing } from "genshin-impact-app/App/modules/screens";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: '#222431',
+  },
+  characterInfoView: {
+
+  },
+  text: {
+    color: '#eee'
+  }
+});
 
 export default class CharacterInfo extends React.Component {
   state = {
@@ -15,6 +30,7 @@ export default class CharacterInfo extends React.Component {
     weapon: "",
     obtain: "",
     rarity: "",
+    bgImage: "",
     loading: true
   };
 
@@ -77,13 +93,15 @@ export default class CharacterInfo extends React.Component {
       return <Initializing />;
     }
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Character Info!</Text>
-        <Text>name: {this.state.name}</Text>
-        <Text>gender: {this.state.gender}</Text>
-        <Text>vision: {this.state.vision}</Text>
-        <Text>weapon: {this.state.weapon}</Text>
-        <Text>rarity: {this.state.rarity}</Text>
+      <View style={styles.container}>
+        <Text style={styles.text}>Character Info!</Text>
+        <View style={styles.characterInfoView}>
+          <Text style={styles.text}>name: {this.state.name}</Text>
+          <Text style={styles.text}>gender: {this.state.gender}</Text>
+          <Text style={styles.text}>vision: {this.state.vision}</Text>
+          <Text style={styles.text}>weapon: {this.state.weapon}</Text>
+          <Text style={styles.text}>rarity: {this.state.rarity}</Text>
+        </View>
       </View>
     );
   }

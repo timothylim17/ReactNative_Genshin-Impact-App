@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { TextField, Button } from 'genshin-impact-app/App/modules/components';
 import { createNewThread } from 'genshin-impact-app/App/firebase';
 
-export default function NewThreads({ navigation }) {
+export default function NewThreads() {
+  const navigation = useNavigation();
   const [roomName, setRoomName] = useState('');
 
   const handlePress = () => {
@@ -15,6 +17,16 @@ export default function NewThreads({ navigation }) {
           navigation.navigate('Threads');
         })
     }
+    Alert.alert(
+      "Error",
+      "Please include text inside the text field.",
+      [
+        {
+          text: "OK",
+        }
+      ],
+      { cancelable: false }
+    );
   }
 
   return (
