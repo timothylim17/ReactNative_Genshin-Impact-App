@@ -1,21 +1,48 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 
 import images from "genshin-impact-app/App/modules/assets";
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: '#222431'
+  },
   image: {
-    height: 75,
-    width: 75,
+    height: 40,
+    width: 40,
+  },
+  tierView: {
+    flexDirection: 'row',
+    backgroundColor: '#20212c',
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    marginTop: 30,
+    height: 100,
+    width: 400
   },
   tier: {
     flex: 1,
-    flexDirection: "row",
-    marginTop: 20
+    flexDirection: "column",
   },
+  titleText: {
+    color: '#eee',
+    marginTop: 20,
+    fontSize: 30,
+    fontWeight: "bold"
+  },
+  text: {
+    color: '#eee',
+    fontSize: 20,
+  }
 });
 
 export default function TierList({ navigation }) {
+
   const STier = [
     "Bennett",
     "Diluc",
@@ -46,8 +73,7 @@ export default function TierList({ navigation }) {
 
   const printTier = (tier) => {
     var i;
-    let Tier = [];
-    let output = [];
+    let Tier, output = [];
     if (tier === "S") Tier = STier;
     else if (tier === "A") Tier = ATier;
     else if (tier === "B") Tier = BTier;
@@ -71,14 +97,24 @@ export default function TierList({ navigation }) {
     return output;
   };
 
+  const RenderTierView = ({ children }) => {
+    return (
+      <View style={styles.tierView}>
+        {children}
+      </View>
+    );
+  }
+
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: '#222431' }}>
-      <Text>Tier List!</Text>
-      <View style={styles.tier}>{printTier("S")}</View>
-      <View style={styles.tier}>{printTier("A")}</View>
-      <View style={styles.tier}>{printTier("B")}</View>
-      <View style={styles.tier}>{printTier("C")}</View>
-      <View style={styles.tier}>{printTier("D")}</View>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.titleText}>Tier List</Text>
+      <ScrollView style={{ flex: 1 }}>
+        <RenderTierView>{ printTier("S") }</RenderTierView>
+        <RenderTierView>{printTier("A")}</RenderTierView> 
+        <RenderTierView>{printTier("B")}</RenderTierView> 
+        <RenderTierView>{printTier("C")}</RenderTierView> 
+        <RenderTierView>{printTier("D")}</RenderTierView> 
+      </ScrollView>
     </SafeAreaView>
   );
 }

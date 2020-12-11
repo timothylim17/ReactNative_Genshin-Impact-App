@@ -106,11 +106,24 @@ export default function RootStack() {
   return (
     <Root.Navigator mode="modal">
       <Root.Screen
-        name="Main"
+        name="Home"
         component={MainStack}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
       />
-      <Root.Screen name="Character Info" component={CharacterInfo} />
+      <Root.Screen
+        name="Character Info"
+        component={CharacterInfo}
+        options={({ navigation}) => ({
+          headerStyle: {
+            backgroundColor: '#222431'
+          },
+          headerTitleStyle: {
+            color: '#eee'
+          },
+        })}
+      />
     </Root.Navigator>
   );
 }

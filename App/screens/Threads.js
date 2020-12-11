@@ -58,10 +58,7 @@ export default function Threads({ navigation }) {
     renderItem={({ item }) => (
       <ThreadRow
         {...item}
-        onPress={() => {
-          console.log('item', item);
-          navigation.navigate('Messages', { thread: item });
-        }}
+        onPress={() => navigation.navigate('Messages', { thread: item })}
         unread={isThreadUnread(item)}
       />
     )}

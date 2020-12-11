@@ -20,14 +20,13 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   optionsView: {
-    flexDirection: 'row',
-    marginTop: 40,
+    marginTop: 35,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 8,
     backgroundColor: '#20212c',
-    paddingHorizontal: 100,
-    height: 100,
+    paddingHorizontal: 110,
+    height: 140,
   }
 });
 
@@ -38,21 +37,24 @@ export default function Home({ navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <Text style={styles.welcomeUserText}>Welcome {firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : ''}!</Text>
-        <View style={styles.optionsView}>
-          <TouchableOpacity onPress={() => navigation.navigate('Threads')}>
-            <Text style={styles.text}>Go to Threads!</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.optionsView}>
-          <TouchableOpacity onPress={() => navigation.navigate('Tier List')}>
-            <Text style={styles.text}>Go to Tier List!</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.optionsView}>
-          <TouchableOpacity onPress={() => console.log('TODO')}>
-            <Text style={styles.text}>Webview to Genshin.gg!</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={styles.optionsView}
+          onPress={() => navigation.navigate('Threads')}
+        >
+          <Text style={styles.text}>Go to Threads!</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.optionsView}
+          onPress={() => navigation.navigate('Tier List')}
+        >
+          <Text style={styles.text}>Go to Tier List!</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.optionsView}
+          onPress={() => console.log('TODO')}
+        >
+          <Text style={styles.text}>Webview to Genshin.gg!</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
