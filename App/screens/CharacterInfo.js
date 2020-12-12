@@ -153,7 +153,7 @@ export default class CharacterInfo extends React.Component {
         <View style={styles.devNotesView}>
           <Text style={styles.text}>{this.state.devNotes}</Text>  
         </View>
-        <Text style={[styles.text, { fontSize: 10, marginTop: 30, paddingHorizontal: 5, color: '#cfcec8'}]}>Information used by ©GenshinList.com 2020</Text>
+        <Text style={[styles.text, { fontSize: 10, marginVertical: 20, paddingHorizontal: 5, color: '#cfcec8'}]}>Information used by ©GenshinList.com 2020</Text>
         </ScrollView>
       </SafeAreaView>
     );
