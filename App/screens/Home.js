@@ -1,8 +1,20 @@
 import React, { useState } from "react";
-import { SafeAreaView, Text, TouchableOpacity, StyleSheet, ScrollView, Modal } from "react-native";
+import {
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  Modal,
+  Image,
+  Dimensions
+} from "react-native";
 import * as firebase from 'firebase';
 
 import { EmbeddedWebView } from 'genshin-impact-app/App/modules/components';
+
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
@@ -13,22 +25,30 @@ const styles = StyleSheet.create({
     backgroundColor: '#222431'
   },
   welcomeUserText: {
-    marginVertical: 90,
+    marginVertical: 40,
     color: '#fff',
     textAlign: 'center',
     fontSize: 30
   },
   text: {
     color: '#fff',
+    fontSize: 20
   },
   optionsView: {
+    flex: 1,
+    flexDirection: 'row',
     marginTop: 35,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     borderRadius: 8,
     backgroundColor: '#20212c',
     paddingHorizontal: 110,
     height: 140,
+  },
+  icon: {
+    height: 75,
+    width: 75,
+    marginRight: 250,
   }
 });
 
@@ -38,25 +58,29 @@ export default function Home({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <Image resizeMode="center" source={require('genshin-impact-app/App/assets/icons/genshin-logo.png')} />
+      <ScrollView style={{ height: '100%', marginBottom: 20}}>
         <Text style={styles.welcomeUserText}>Welcome {firebase.auth().currentUser.displayName ? firebase.auth().currentUser.displayName : ''}!</Text>
         <TouchableOpacity
           style={styles.optionsView}
           onPress={() => navigation.navigate('Threads')}
         >
-          <Text style={styles.text}>Go to Threads!</Text>
+          <Image style={styles.icon} source={require('genshin-impact-app/App/assets/icons/thread.png')} />
+          <Text style={styles.text}>Threads</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.optionsView}
           onPress={() => navigation.navigate('Tier List')}
         >
-          <Text style={styles.text}>Go to Tier List!</Text>
+          <Image style={styles.icon} source={require('genshin-impact-app/App/assets/icons/tier.png')} />
+          <Text style={styles.text}>Tier List</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.optionsView}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={styles.text}>Webview to Genshin.gg!</Text>
+          <Image style={styles.icon} source={require('genshin-impact-app/App/assets/icons/genshin-gg.png')} />
+          <Text style={styles.text}>Visit Genshin.GG</Text>
           <Modal animationType="slide" tansparent visible={modalVisible}>
             <TouchableOpacity
               style={{ flex: 1 }}
