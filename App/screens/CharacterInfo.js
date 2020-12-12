@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
   },
   characterBackgroundImage: {
     marginTop: 20,
-    height: deviceHeight / 2,
-    width: deviceWidth / 2,
+    height: 520,
+    width: 250,
   },
   characterInfoText: {
     paddingBottom: 5
