@@ -67,9 +67,9 @@ export default function ArtifactsList({ navigation }) {
     "Noblesse_Oblige",
     "Retracing_Bolide",
     "Thundering_Fury",
-    // "Thundersoother",
-    // "Viridescent_Venerer",
-    // "Wanderers_Troupe",
+    "Thundersoother",
+    "Viridescent_Venerer",
+    "Wanderers_Troupe",
   ];
   const FourStar = [
     "Berserker",

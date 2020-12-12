@@ -56,7 +56,6 @@ function MainStack() {
       <Drawer.Screen name="Threads" component={MessagingStack} />
       <Drawer.Screen name="Tier List" component={TierList} />
       <Drawer.Screen name="Artifacts List" component={ArtifactsList} />
-      <Drawer.Screen name="Artifact Info" component={ArtifactInfo} />
     </Drawer.Navigator>
   );
 }
@@ -133,6 +132,18 @@ export default function RootStack() {
       <Root.Screen
         name="Character Info"
         component={CharacterInfo}
+        options={({ navigation }) => ({
+          headerStyle: {
+            backgroundColor: "#222431",
+          },
+          headerTitleStyle: {
+            color: "#eee",
+          },
+        })}
+      />
+      <Root.Screen
+        name="Artifact Info"
+        component={ArtifactInfo}
         options={({ navigation }) => ({
           headerStyle: {
             backgroundColor: "#222431",
