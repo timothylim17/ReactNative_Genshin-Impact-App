@@ -1,6 +1,5 @@
-const genshinApi = () => {
-  const path = "characters";
-  return fetch(`https://genshinlist.com/api/${path}`).then((response) =>
+const genshinApi = (path) => {
+  return fetch(`https://genshinlist.com/api${path}`).then((response) =>
     response.json()
   );
 };

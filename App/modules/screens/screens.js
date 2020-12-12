@@ -8,6 +8,8 @@ import CharacterInfo from "genshin-impact-app/App/screens/CharacterInfo";
 import Messages from "genshin-impact-app/App/screens/Messages";
 import NewThread from "genshin-impact-app/App/screens/NewThread";
 import InitializingMessage from "genshin-impact-app/App/screens/InitializingMessage";
+import ArtifactsList from "genshin-impact-app/App/screens/ArtifactsList";
+import ArtifactInfo from "genshin-impact-app/App/screens/ArtifactInfo";
 
 export {
   Home,
@@ -19,5 +21,7 @@ export {
   CharacterInfo,
   Messages,
   NewThread,
-  InitializingMessage
+  InitializingMessage,
+  ArtifactsList,
+  ArtifactInfo,
 };

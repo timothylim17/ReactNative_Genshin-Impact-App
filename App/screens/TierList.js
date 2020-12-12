@@ -120,29 +120,29 @@ export default function TierList({ navigation }) {
     <SafeAreaView style={styles.container}>
       <Text style={styles.titleText}>Tier List</Text>
       <View style={styles.textContainer}>
-        <Text style={[styles.text, { paddingHorizontal: 20 } ]}>
+        <Text style={[styles.text, { paddingHorizontal: 20 }]}>
           This is a tier list based on the Genshin.gg website. Expect the list
           to change as the game updates.
         </Text>
       </View>
       <ScrollView style={{ flex: 1 }}>
-        <Text style={[styles.text, { marginBottom: 5}]}>S Tier</Text>
+        <Text style={[styles.text, { marginBottom: 5 }]}>S Tier</Text>
         <RenderTierView style={{ borderColor: "#ff7f7f" }}>
           {printTier("S")}
         </RenderTierView>
-        <Text style={[styles.text, { marginBottom: 5}]}>A Tier</Text>
+        <Text style={[styles.text, { marginBottom: 5 }]}>A Tier</Text>
         <RenderTierView style={{ borderColor: "#ffbf7f" }}>
           {printTier("A")}
         </RenderTierView>
-        <Text style={[styles.text, { marginBottom: 5}]}>B Tier</Text>
+        <Text style={[styles.text, { marginBottom: 5 }]}>B Tier</Text>
         <RenderTierView style={{ borderColor: "#ffff7f" }}>
           {printTier("B")}
         </RenderTierView>
-        <Text style={[styles.text, { marginBottom: 5}]}>C Tier</Text>
+        <Text style={[styles.text, { marginBottom: 5 }]}>C Tier</Text>
         <RenderTierView style={{ borderColor: "#bfff7f" }}>
           {printTier("C")}
         </RenderTierView>
-        <Text style={[styles.text, { marginBottom: 5}]}>D Tier</Text>
+        <Text style={[styles.text, { marginBottom: 5 }]}>D Tier</Text>
         <RenderTierView style={{ borderColor: "#7fff7f" }}>
           {printTier("D")}
         </RenderTierView>

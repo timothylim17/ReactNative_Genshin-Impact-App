@@ -26,6 +26,34 @@ const images = {
   Zhongli: require("genshin-impact-app/App/assets/characters/zhongli.png"),
 };
 
+const artifacts = {
+  Adventurer: require("genshin-impact-app/App/assets/artifacts/adventurer.png"),
+  Archaic_Petra: require("genshin-impact-app/App/assets/artifacts/archaic-petra.png"),
+  Berserker: require("genshin-impact-app/App/assets/artifacts/berserker.png"),
+  Bloodstained_Chivalry: require("genshin-impact-app/App/assets/artifacts/bloodstained-chivalry.png"),
+  Brave_Heart: require("genshin-impact-app/App/assets/artifacts/brave-heart.png"),
+  Crimson_Witch_of_Flames: require("genshin-impact-app/App/assets/artifacts/crimson-witch-of-flames.png"),
+  Defenders_Will: require("genshin-impact-app/App/assets/artifacts/defenders-will.png"),
+  Gambler: require("genshin-impact-app/App/assets/artifacts/gambler.png"),
+  Gladiators_Finale: require("genshin-impact-app/App/assets/artifacts/gladiators-finale.png"),
+  Instructor: require("genshin-impact-app/App/assets/artifacts/instructor.png"),
+  Lavawalker: require("genshin-impact-app/App/assets/artifacts/lavawalker.png"),
+  Lucky_Dog: require("genshin-impact-app/App/assets/artifacts/lucky-dog.png"),
+  Maiden_Beloved: require("genshin-impact-app/App/assets/artifacts/maiden-beloved.png"),
+  Martial_Artist: require("genshin-impact-app/App/assets/artifacts/martial-artist.png"),
+  Noblesse_Oblige: require("genshin-impact-app/App/assets/artifacts/noblesse-oblige.png"),
+  Resolution_of_Sojourner: require("genshin-impact-app/App/assets/artifacts/resolution-of-sojourner.png"),
+  Retracing_Bolide: require("genshin-impact-app/App/assets/artifacts/retracing-bolide.png"),
+  Scholar: require("genshin-impact-app/App/assets/artifacts/scholar.png"),
+  The_Exile: require("genshin-impact-app/App/assets/artifacts/the-exile.png"),
+  Thundering_Fury: require("genshin-impact-app/App/assets/artifacts/thundering-fury.png"),
+  Thundersoother: require("genshin-impact-app/App/assets/artifacts/thundersoother.png"),
+  Tiny_Miracle: require("genshin-impact-app/App/assets/artifacts/tiny-miracle.png"),
+  Traveling_Doctor: require("genshin-impact-app/App/assets/artifacts/traveling-doctor.png"),
+  Viridescent_Venerer: require("genshin-impact-app/App/assets/artifacts/viridescent-venerer.png"),
+  Wanderers_Troupe: require("genshin-impact-app/App/assets/artifacts/wanderers-troupe.png"),
+};
+
 const portrait = {
   Amber: require("genshin-impact-app/App/assets/portrait/Character_Amber_Portrait.png"),
   Barbara: require("genshin-impact-app/App/assets/portrait/Character_Barbara_Portrait.png"),
@@ -107,4 +135,4 @@ const devNotes = {
     "He can but should not be used as a dps. He is an amazing crowd controller and can dish out a substantial amount of damage if used correctly. By tapping his Elemental Skill, he summons a pillar which will consistently burst and do damage. By holding his Elemental Skill, he creates a shield on himself and does damage to enemies. His Elemental Burst summons a meteor which petrifies any enemy hit by it.",
 };
 
-export { images, portrait, devNotes };
+export { images, artifacts, portrait, devNotes };

@@ -14,6 +14,8 @@ import {
   NewThread,
   Messages,
   InitializingMessage,
+  ArtifactsList,
+  ArtifactInfo,
 } from "genshin-impact-app/App/modules/screens";
 import { HeaderIcon } from "genshin-impact-app/App/modules/components";
 import { AuthContext } from "genshin-impact-app/App/modules/navigation";
@@ -53,6 +55,8 @@ function MainStack() {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Threads" component={MessagingStack} />
       <Drawer.Screen name="Tier List" component={TierList} />
+      <Drawer.Screen name="Artifacts List" component={ArtifactsList} />
+      <Drawer.Screen name="Artifact Info" component={ArtifactInfo} />
     </Drawer.Navigator>
   );
 }
