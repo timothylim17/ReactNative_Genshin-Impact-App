@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#20212c",
     borderRadius: 10,
     borderWidth: 1,
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
-    paddingHorizontal: 15,
+    paddingHorizontal: 9.5,
     marginBottom: 30,
     height: 100,
-    width: 400,
+    width: 400
   },
   tier: {
     flex: 1,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: "#eee",
-    marginTop: 30,
+    marginTop: 40,
     fontSize: 30,
     fontWeight: "bold",
   },
@@ -121,14 +121,8 @@ export default function ArtifactsList({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.titleText}>Tier List</Text>
-      <View>
-        <Text style={[styles.text, { paddingHorizontal: 20 }]}>
-          This is a tier list based on the Genshin.gg website. Expect the list
-          to change as the game updates.
-        </Text>
-      </View>
-      <ScrollView style={{ flex: 1 }}>
+      <Text style={styles.titleText}>Artifact List</Text>
+      <ScrollView style={{ flex: 1, marginTop: 50, }}>
         <Text style={[styles.text, { marginBottom: 5 }]}>5 Star and under</Text>
         <RenderTierView style={{ borderColor: "#ff7f7f" }}>
           {printArtifacts("5")}

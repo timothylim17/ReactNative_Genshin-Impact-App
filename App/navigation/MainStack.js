@@ -55,7 +55,7 @@ function MainStack() {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Threads" component={MessagingStack} />
       <Drawer.Screen name="Tier List" component={TierList} />
-      <Drawer.Screen name="Artifacts List" component={ArtifactsList} />
+      <Drawer.Screen name="Artifact List" component={ArtifactsList} />
     </Drawer.Navigator>
   );
 }
