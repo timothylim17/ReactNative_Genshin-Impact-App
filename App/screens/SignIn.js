@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
 export default function SignIn({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState(null);
   const { signIn } = useContext(AuthContext);
 
   return (
@@ -73,25 +72,10 @@ export default function SignIn({ navigation }) {
             value={password}
             onChangeText={credentials => setPassword(credentials)}
           />
-          </View>
-          <Text
-            style={{
-              fontSize: 18,
-              textAlign: 'center',
-              color: 'red',
-              width: '80%'
-            }}
-          >
-            {errorMessage}  
-          </Text>
+        </View>
         <TouchableOpacity
-            style={{ width: '86%', marginTop: 10 }}
-            onPress={() => {
-              signIn(email, password)
-                .catch(e => {
-                  setErrorMessage(e);
-                });
-            }}
+          style={{ width: '86%', marginTop: 20 }}
+          onPress={() => signIn(email, password)}
         >
           <View style={styles.button}>
             <Text style={{ color: '#fff'}}>Sign In</Text>  

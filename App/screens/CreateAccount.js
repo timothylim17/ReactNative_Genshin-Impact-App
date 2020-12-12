@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   button: {
-    backgroundColor: '#3a559f',
+    backgroundColor: '#3a559a',
     height: 44,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
 export default function CreateAccount({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = ('');
 
   const { signUp } = useContext(AuthContext);
 
@@ -82,27 +81,12 @@ export default function CreateAccount({ navigation }) {
             onChangeText={credentials => setPassword(credentials)}
           />
         </View>
-        <Text
-          style={{
-            fontSize: 18,
-            textAlign: 'center',
-            color: 'red',
-            width: '80%'
-          }}
-        >
-          {errorMessage}  
-        </Text>
         <TouchableOpacity
-          style={{ width: '86%', marginTop: 10 }}
-          onPress={() => {
-            signUp(email, password)
-              .catch(e => {
-                setErrorMessage(e);
-              });
-          }}
+          style={{ width: '86%', marginTop: 20 }}
+          onPress={() => signUp(email, password)}
         >
           <View style={styles.button}>
-            <Text style={{ color: '#fff'}}>Sign Up</Text>
+            <Text style={{ color: '#fff'}}>Create Account</Text>
           </View>
         </TouchableOpacity>
         <View style={{ marginTop: 10 }}>
