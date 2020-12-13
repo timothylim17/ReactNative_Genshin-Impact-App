@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#20212c",
     borderRadius: 10,
     borderWidth: 1,
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
     paddingHorizontal: 15,
     marginBottom: 30,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: "#eee",
-    marginTop: 30,
+    marginTop: 40,
     fontSize: 30,
     fontWeight: "bold",
   },

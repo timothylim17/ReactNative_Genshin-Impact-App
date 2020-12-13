@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     borderRadius: 8,
+    borderColor: '#000',
+    borderWidth: 1,
     backgroundColor: '#20212c',
     paddingHorizontal: 110,
     height: 140,
@@ -77,9 +79,16 @@ export default function Home({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.optionsView}
+          onPress={() => navigation.navigate('Artifact List')}
+        >
+          <Image style={[styles.icon, { height: 100, width: 100}]} source={require('genshin-impact-app/App/assets/artifacts/crimson-witch-of-flames.png')} />
+          <Text style={styles.text}>Artifact List</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.optionsView}
           onPress={() => setModalVisible(true)}
         >
-          <Image style={styles.icon} source={require('genshin-impact-app/App/assets/icons/genshin-gg.png')} />
+          <Image style={[styles.icon, { left: 20}]} source={require('genshin-impact-app/App/assets/icons/genshin-gg.png')} />
           <Text style={styles.text}>Visit Genshin.GG</Text>
           <Modal animationType="slide" tansparent visible={modalVisible}>
             <TouchableOpacity

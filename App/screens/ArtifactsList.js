@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#20212c",
     borderRadius: 10,
     borderWidth: 1,
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
-    paddingHorizontal: 15,
+    paddingHorizontal: 7,
     marginBottom: 30,
     height: 100,
-    width: 400,
+    width: 400
   },
   tier: {
     flex: 1,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: "#eee",
-    marginTop: 30,
+    marginTop: 40,
     fontSize: 30,
     fontWeight: "bold",
   },
@@ -67,9 +67,9 @@ export default function ArtifactsList({ navigation }) {
     "Noblesse_Oblige",
     "Retracing_Bolide",
     "Thundering_Fury",
-    // "Thundersoother",
-    // "Viridescent_Venerer",
-    // "Wanderers_Troupe",
+    "Thundersoother",
+    "Viridescent_Venerer",
+    "Wanderers_Troupe",
   ];
   const FourStar = [
     "Berserker",
@@ -121,14 +121,14 @@ export default function ArtifactsList({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.titleText}>Tier List</Text>
-      <View>
+      <Text style={styles.titleText}>Artifact List</Text>
+      <View style={styles.textContainer}>
         <Text style={[styles.text, { paddingHorizontal: 20 }]}>
-          This is a tier list based on the Genshin.gg website. Expect the list
-          to change as the game updates.
+          This is the artifact list. Expect the list to 
+          change as the game updates.
         </Text>
       </View>
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1, marginTop: 20, }}>
         <Text style={[styles.text, { marginBottom: 5 }]}>5 Star and under</Text>
         <RenderTierView style={{ borderColor: "#ff7f7f" }}>
           {printArtifacts("5")}

@@ -15,9 +15,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#222431",
   },
   characterView: {
-    marginTop: 40,
+    marginTop: 20,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 10,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    backgroundColor: '#20212c',
+    marginHorizontal: 5
   },
   characterInfoView: {
     marginTop: 20,
@@ -47,11 +52,16 @@ const styles = StyleSheet.create({
   },
   characterBackgroundImage: {
     marginTop: 20,
-    height: 520,
+    height: 530,
     width: 250,
   },
   characterInfoText: {
     paddingBottom: 5
+  },
+  separator: {
+    marginTop: 40,
+    borderBottomColor: "#eee",
+    borderBottomWidth: 1,
   }
 });
 
@@ -135,12 +145,20 @@ export default class CharacterInfo extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView style={{ height: '100%' }}>
-          <View style={styles.characterView}>
-            <Text style={[styles.text, {fontWeight: 'bold', fontSize: 35, textAlign: "center"}]}>{this.state.name}</Text>
-            <Image style={styles.characterBackgroundImage} source={portrait[this.state.name]} />
-            <Text style={[styles.text, {fontSize: 15, paddingHorizontal: 10, marginTop: 30}]}>"{this.capitalizeFirstLetter(this.state.description)}"</Text>
+          <Text style={
+            [styles.text,
+              {
+                fontWeight: 'bold',
+                fontSize: 35,
+                textAlign: "center",
+                marginTop: 20
+              }]}>{this.state.name}</Text>
+        <View style={styles.characterView}>
+          <Image style={styles.characterBackgroundImage} source={portrait[this.state.name]} />
+          <Text style={[styles.text, {fontSize: 15, paddingHorizontal: 10, marginTop: 30, paddingBottom: 10}]}>"{this.capitalizeFirstLetter(this.state.description)}"</Text>
           </View>
-          <Text style={[styles.text, { fontWeight: 'bold', fontSize: 25, marginTop: 45, paddingHorizontal: 10}]}>Overview</Text>
+          <View style={styles.separator} />
+        <Text style={[styles.text, { fontWeight: 'bold', fontSize: 25, marginTop: 45, paddingHorizontal: 10}]}>Overview</Text>
         <View style={styles.characterInfoView}>
           <Text style={[styles.text, styles.characterInfoText]}>Sex: {this.capitalizeFirstLetter(this.state.gender)}</Text>
           <Text style={[styles.text, styles.characterInfoText]}>Vision: {this.capitalizeFirstLetter(this.state.vision)}</Text>
