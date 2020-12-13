@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: "space-evenly",
     alignItems: "center",
-    paddingHorizontal: 9.5,
+    paddingHorizontal: 7,
     marginBottom: 30,
     height: 100,
     width: 400
@@ -122,7 +122,13 @@ export default function ArtifactsList({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titleText}>Artifact List</Text>
-      <ScrollView style={{ flex: 1, marginTop: 50, }}>
+      <View style={styles.textContainer}>
+        <Text style={[styles.text, { paddingHorizontal: 20 }]}>
+          This is the artifact list. Expect the list to 
+          change as the game updates.
+        </Text>
+      </View>
+      <ScrollView style={{ flex: 1, marginTop: 20, }}>
         <Text style={[styles.text, { marginBottom: 5 }]}>5 Star and under</Text>
         <RenderTierView style={{ borderColor: "#ff7f7f" }}>
           {printArtifacts("5")}
