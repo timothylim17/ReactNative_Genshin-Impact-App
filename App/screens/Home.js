@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     borderRadius: 8,
+    borderColor: '#000',
+    borderWidth: 1,
     backgroundColor: '#20212c',
     paddingHorizontal: 110,
     height: 140,
