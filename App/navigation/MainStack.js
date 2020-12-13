@@ -54,7 +54,10 @@ function MainStack() {
     >
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Threads" component={MessagingStack} />
-      <Drawer.Screen name="Tier List" component={TierList} />
+      <Drawer.Screen
+        name="Tier List"
+        component={TierList}
+      />
       <Drawer.Screen name="Artifact List" component={ArtifactsList} />
     </Drawer.Navigator>
   );
@@ -74,6 +77,7 @@ function MessagingStack() {
           headerStyle: {
             backgroundColor: "#222431",
           },
+          headerTintColor: '#eee',
           headerRight: () => (
             <HeaderIcon
               iconName="add"
@@ -93,6 +97,7 @@ function MessagingStack() {
           headerTitleStyle: {
             color: "#eee",
           },
+          headerTintColor: '#eee'
         })}
       />
       <Messaging.Screen
@@ -109,6 +114,7 @@ function MessagingStack() {
           headerRight: () => (
             <HeaderIcon iconName="close" onPress={() => navigation.pop()} />
           ),
+          headerTintColor: '#eee'
         })}
       />
       <Messaging.Screen
@@ -127,6 +133,7 @@ export default function RootStack() {
         component={MainStack}
         options={{
           headerShown: false,
+          headerTintColor: '#eee'
         }}
       />
       <Root.Screen
@@ -139,6 +146,7 @@ export default function RootStack() {
           headerTitleStyle: {
             color: "#eee",
           },
+          headerTintColor: '#eee'
         })}
       />
       <Root.Screen
@@ -151,6 +159,7 @@ export default function RootStack() {
           headerTitleStyle: {
             color: "#eee",
           },
+          headerTintColor: '#eee'
         })}
       />
     </Root.Navigator>
